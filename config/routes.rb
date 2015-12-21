@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  
-  get 'users/destory'
 
   root 'static_pages#home'
+  
+  resources :users
+  resources :roles
+  resources :plant_states  
 
   get 'about' => 'static_pages#about'
 

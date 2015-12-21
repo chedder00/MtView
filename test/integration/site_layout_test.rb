@@ -7,6 +7,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", root_path
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
+    #assert_select "a[href=?]", plant_state_path
     #assert_select "a[href=?]", plant_path
     #assert_select "a[href=?]", task_path
     #assert_select "a[href=?]", note_path

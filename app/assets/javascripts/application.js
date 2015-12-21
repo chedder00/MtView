@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min
+//= require maskedinput
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  $('[data-mask]').each(function(index, value) {
+    var element;
+    element = void 0;
+    element = $(value);
+    return element.mask($(value).data('mask'));
+  });
+});

@@ -1,0 +1,52 @@
+<% render 'shared/page_title' %>
+<h1>New User Form</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@user) do |user| %>
+      <%= render 'shared/error_messages', object: user.object %>
+      
+      <%= user.label :name %>
+      <%= user.text_field :name, class: "form-control" %>
+
+      <%= user.label :email %>
+      <%= user.text_field :email, class: "form-control" %>
+
+      <%= user.label :hire_date %>
+      <%= user.date_field :hire_date, class: "form-control" %>
+
+      <%= user.label :address %>
+      <%= user.text_field :address, class: "form-control" %>
+
+      <%= user.label :address2 %>
+      <%= user.text_field :address2, class: "form-control" %>
+
+      <%= user.label :city %>
+      <%= user.text_field :city, class: "form-control" %>
+
+      <%= user.label :state %>
+      <%= user.text_field :state, class: "form-control" %>
+
+      <%= user.label :zipcode %>
+      <%= user.text_field :zipcode, class: "form-control" %>
+
+      <%= user.label :phone_number %>
+      <%= user.text_field :phone_number, class: "form-control", 
+                          data: { mask: '(999)-999-9999' } %>
+
+      <%= user.label :role %><br />
+      <%= user.select :role_id, 
+                   options_for_select(Role.all.map{|s|[s.name, s.id]}) %>
+
+      <%= user.label :password %>
+      <%= user.text_field :password, class: "form-control" %>
+
+      <%= user.label :password_confirmation %>
+      <%= user.text_field :password_confirmation, class: "form-control" %>
+
+      <%= user.submit "Create Account", class: "btn btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>
