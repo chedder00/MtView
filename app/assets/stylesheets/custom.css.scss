@@ -93,6 +93,27 @@ p
   line-height: 1.7em;
 }
 
+/* Header */
+
+#logo
+{
+  float: left;
+  margin-right: 10px;
+  margin-left: 20px;
+  font-size: 1.7em;
+  color: $white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+
+  &:hover
+  {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
 /* Footer */
 
 footer
@@ -195,5 +216,16 @@ input
   .form-control
   {
     color: $state-danger-text;
+  }
+}
+
+.checkbox
+{
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span
+  {
+    margin-left: 20px;
+    font-weight: normal;
   }
 }

@@ -11,7 +11,7 @@
       <%= user.text_field :name, class: "form-control" %>
 
       <%= user.label :email %>
-      <%= user.text_field :email, class: "form-control" %>
+      <%= user.email_field :email, class: "form-control" %>
 
       <%= user.label :hire_date %>
       <%= user.date_field :hire_date, class: "form-control" %>
@@ -40,10 +40,10 @@
                    options_for_select(Role.all.map{|s|[s.name, s.id]}) %>
 
       <%= user.label :password %>
-      <%= user.text_field :password, class: "form-control" %>
+      <%= user.password_field :password, class: "form-control" %>
 
       <%= user.label :password_confirmation %>
-      <%= user.text_field :password_confirmation, class: "form-control" %>
+      <%= user.password_field :password_confirmation, class: "form-control" %>
 
       <%= user.submit "Create Account", class: "btn btn-primary" %>
     

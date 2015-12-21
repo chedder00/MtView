@@ -11,6 +11,7 @@ class UserTest < ActiveSupport::TestCase
                      state: "OR",
                      zipcode: "12345",
                      phone_number: "123-456-7890",
+                     role_id: 2,
                      password: "Password1",
                      password_confirmation: "Password1")
   end

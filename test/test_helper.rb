@@ -7,4 +7,25 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  # test to see if user is logged in
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
+  # Logs in a test user to the application
+  def login_as(user, options = {})
+    password = options[:password] = 'Password1'
+    if(integration_test?)
+      post login_path, session: { email: user.email, password: password }
+    else
+      session[:user_id] = user.id
+    end
+  end
+
+  #Returns true only inside integration tests
+  def integration_test?
+    defined?(post_via_redirect)
+  end
+  
 end

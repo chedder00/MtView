@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   resources :roles
   resources :plant_states  
 
-  get 'about' => 'static_pages#about'
+  get 'login' => 'sessions#new'
+  post 'login' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
 
+  get 'about' => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
 
   # The priority is based upon order of creation: first created -> highest priority.

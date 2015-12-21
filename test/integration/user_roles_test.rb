@@ -3,7 +3,7 @@ require 'test_helper'
 class UserRolesTest < ActionDispatch::IntegrationTest
   
   def setup
-    @role = Role.new(name: "Regular User", level: 1)
+    @role = roles(:regular)
   end
 
   test "should be valid" do 
