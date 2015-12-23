@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  attr_accessor :reset_token
+
   #ensure email is lowercase before saving
   before_save { self.email = email.downcase }
   #ensure name is present and maximum of 50 characters
@@ -37,8 +39,29 @@ class User < ActiveRecord::Base
     #return a random url safe token
     def new_token
       SecureRandom.urlsafe_base64
-    end
-    
+    end    
+  end
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.zone.now)
+  end
+
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  #Returns true if the given token matches the digest
+  def authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  #Returns true if reset token was generates less than 2 hours ago
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
   end
 
 end

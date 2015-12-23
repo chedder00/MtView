@@ -3,15 +3,16 @@ Rails.application.routes.draw do
   root 'static_pages#home'
   
   resources :users
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :roles
   resources :plant_states  
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
-  delete 'logout' => 'sessions#destroy'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
-  get 'about' => 'static_pages#about'
-  get 'contact' => 'static_pages#contact'
+  get    'about'   => 'static_pages#about'
+  get    'contact' => 'static_pages#contact'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -4,6 +4,7 @@ class UsersRegistrationTest < ActionDispatch::IntegrationTest
   
   def setup
     @user = users(:reg_user)
+    ActionMailer::Base.deliveries.clear
   end
 
   test "invalid registration should fail" do
@@ -17,6 +18,8 @@ class UsersRegistrationTest < ActionDispatch::IntegrationTest
                               password_confirmation: "bar"}
     end
     assert_template 'users/_form'
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors'
   end
 
   test "should create user if logged in as admin user" do
