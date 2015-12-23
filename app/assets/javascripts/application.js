@@ -14,14 +14,15 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require maskedinput
-//= require turbolinks
 //= require_tree .
 
-$(document).ready(function() {
-  $('[data-mask]').each(function(index, value) {
-    var element;
-    element = void 0;
-    element = $(value);
-    return element.mask($(value).data('mask'));
+
+  $(window).resize(function () 
+  { 
+    $('body').css('padding-top', parseInt($('#main-navbar').css("height"))+10);
   });
-});
+
+  $(window).load(function () 
+  { 
+    $('body').css('padding-top', parseInt($('#main-navbar').css("height"))+10);        
+  });

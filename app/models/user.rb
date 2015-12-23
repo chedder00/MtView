@@ -20,7 +20,8 @@ class User < ActiveRecord::Base
   PASSWORD_REGEX = /\A^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,25}$\z/
   validates :password, format: { with: PASSWORD_REGEX, 
             message: "must be between 6 and 25 characters and contain 
-            at least 1 uppercase and 1 lowercase character and 1 number" }
+            at least 1 uppercase and 1 lowercase character and 1 number" },
+            allow_nil: true
 
   #Ensure user has a role
   validates :role_id, presence: true

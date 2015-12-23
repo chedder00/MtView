@@ -3,5 +3,26 @@
 reg_user:
   name: Regular User 
   email: regular@user.com
-  role_id: 2
+  role_id: <%= ActiveRecord::FixtureSet.identify(:regular) %>
   password_digest: <%= User.digest('Password1') %>
+
+admin_user:
+  name: Admin User
+  email: admin@user.com
+  role_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
+  password_digest: <%= User.digest('Password1') %>
+
+controller_user:
+  name: Controller User
+  email: controller@user.com
+  role_id: <%= ActiveRecord::FixtureSet.identify(:controller) %>
+  password_digest: <%= User.digest('Password1') %>
+
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User #{n}" %>
+  email: <%= "user#{n}@email.com" %>
+  role_id: <%= ActiveRecord::FixtureSet.identify(:regular) %>
+  password_digest: <%= User.digest('Password1') %>    
+<% end %>

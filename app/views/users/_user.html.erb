@@ -1,0 +1,11 @@
+<li>
+  <%= link_to user.name, user %>
+  <% if authorized?("Administrator") %>
+    <%= link_to "edit", edit_user_path(user), class: "admin" %>
+    <% unless user.name == "Root User" %>
+      <%= link_to "delete", user, method: :delete, 
+                          data: { confirm: "Delete user #{user.name}?" },
+                          class: "admin" %>
+    <% end %>
+  <% end %>
+</li>

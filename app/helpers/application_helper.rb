@@ -9,4 +9,14 @@ module ApplicationHelper
       page_title + " | " + site_title
     end
   end
+
+
+  # Mainly used to simplify new and edit forms since they are basically the same
+  # except for the controller used to render the page.  This function uses the
+  # calling controller to generate form string to render.
+  
+  def get_form
+    "#{controller.controller_name}/form"
+  end
+
 end

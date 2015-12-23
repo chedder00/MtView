@@ -7,3 +7,15 @@ reseller:
 regular:
   name: Regular User
   level: 2
+
+inventory:
+  name: Inventory User
+  level: 5
+
+admin:
+  name: Administrator
+  level: 10
+
+controller:
+  name: controller
+  level: 15

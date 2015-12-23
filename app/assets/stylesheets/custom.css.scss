@@ -32,7 +32,7 @@ $white: #ffffff;
 
 body
 {
-  padding-top: 65px;
+  padding-top: 60px;
 }
 
 section
@@ -66,7 +66,7 @@ h1
 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  margin-bottom: 0px;
   text-align: center;
   
   &.logo
@@ -95,17 +95,17 @@ p
 
 /* Header */
 
-#logo
+.logo
 {
   float: left;
   margin-right: 10px;
   margin-left: 20px;
-  font-size: 1.7em;
+  font-size: 3em;
   color: $white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
   font-weight: bold;
+  width: 100%;
 
   &:hover
   {
@@ -228,4 +228,36 @@ input
     margin-left: 20px;
     font-weight: normal;
   }
+}
+
+/* Users */
+
+.users
+{
+  list-style: none;
+  margin: 0;
+  li
+  {
+    overflow: auto;
+    padding: 5px 0;
+    border-bottom: 1px solid $gray-lighter;
+
+    a
+    {
+      color: black;
+      &:hover
+      {
+        color: green;
+        text-decoration: none;
+      }
+      &.admin
+      {
+        color: blue;
+        &:hover
+        {
+          color: red;
+        }
+      }
+    }
+  }    
 }

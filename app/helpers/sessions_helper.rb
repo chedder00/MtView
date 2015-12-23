@@ -25,5 +25,33 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  #Returns true is user level is greater than or equal to administration level
+  def authorized?(key)
+    admin_lvl = Role.find_by(name: "#{key}").level
+    if(!current_user.nil?)
+      user_lvl = Role.find(current_user.role_id).level
+    else
+      user_lvl = -1
+    end
   
+    user_lvl >= admin_lvl
+  end
+
+  #Returns true is user is equal to current_user
+  def current_user?(user)
+    user == current_user
+  end
+  
+  #Redirects to stored location or to the default location
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  #Stores the URL try to be accessed
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
+  end
+
 end

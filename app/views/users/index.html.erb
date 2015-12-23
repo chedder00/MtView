@@ -1,0 +1,8 @@
+<% render 'shared/page_title' %>
+<h1>All Users</h1>
+
+<%= will_paginate %>
+  <ul class="users">
+    <%= render @users %>
+  </ul>
+<%= will_paginate %>
