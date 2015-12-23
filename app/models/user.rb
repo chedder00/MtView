@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   #ensure email is lowercase before saving
   before_save { self.email = email.downcase }
   #ensure name is present and maximum of 50 characters
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, allow_nil: false
   #Email validation
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },

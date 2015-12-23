@@ -4,7 +4,7 @@
     <%= form_for(@user) do |user| %>
       <%= render 'shared/error_messages', object: user.object %>
       
-      <% unless @user.name == "Root User" %>
+      <% unless @user.name == "Root User" || !admin? %>
       <%= user.label :name %>
       <%= user.text_field :name, class: "form-control" %>
 

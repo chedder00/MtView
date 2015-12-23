@@ -19,4 +19,8 @@ module ApplicationHelper
     "#{controller.controller_name}/form"
   end
 
+  def admin?
+    authorized?("Administrator")
+  end
+
 end

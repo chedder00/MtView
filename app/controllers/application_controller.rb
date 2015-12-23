@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def admin?
+    authorized?("Administrator")
+  end
+
 end
