@@ -10,10 +10,12 @@
       <% if admin? %>
         <li><%= link_to "View all users", users_path %></li>
         <li><%= link_to "Add new user", new_user_path %></li>
+        <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
         <li class="divider"></li>
         <li><%= link_to "View user roles", roles_path %></li>
         <li><%= link_to "Add new role", new_role_path %></li>
       <% else %>
+        <!-- Non admin users only have the ability to change password -->
         <li><%= link_to "Change Password", edit_user_path(current_user) %></li>
       <% end %>
     </ul>
@@ -27,13 +29,12 @@
     <ul class="dropdown-menu">
       <li><%= link_to "View all plants", "#" %></li>
 
-      <% unless admin? %>
+      <% if admin? %>
         <li><%= link_to "Add a Plant", "#" %></li>
+        <li class="divider"></li>
+        <li><%= link_to "View all plant states", plant_states_path %></li>
+        <li><%= link_to "Add new state", new_plant_state_path %></li>
       <% end %>
-
-      <li class="divider"></li>
-      <li><%= link_to "View all plant states", plant_states_path %></li>
-      <li><%= link_to "Add new state", new_plant_state_path %></li>
     </ul>
   </li>
 

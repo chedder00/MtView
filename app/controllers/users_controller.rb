@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   #Ensures all pages are only accessed by administrator or higher users
   #method can be found in application controller
   before_action :administrator_access, except: [:edit, :update]
+
+  #Ensure only logged in users can modify profile
   before_action :logged_in_user, only: [:edit, :update]
 
   def new
@@ -18,6 +20,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @btn_text = "Create User"
     @page_heading = "New Users Form"
+    @user.password = @user.password_confirmation = "Password1"
     if(@user.save)
       flash[:success] = "Account created for #{@user.name}"
       redirect_to root_path

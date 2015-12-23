@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 reseller:
-  name: reseller
+  name: Reseller
   level: 1
 
 regular:

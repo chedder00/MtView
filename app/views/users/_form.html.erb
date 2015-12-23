@@ -39,12 +39,15 @@
                                       selected: @user.role_id ) %>
 
       <% end %>
-      
-      <%= user.label :password %>
-      <%= user.password_field :password, class: "form-control" %>
 
-      <%= user.label :password_confirmation %>
-      <%= user.password_field :password_confirmation, class: "form-control" %>
+      <!-- New user all get the same password only show field on edits -->
+      <% if @user.id %>
+        <%= user.label :password %>
+        <%= user.password_field :password, class: "form-control" %>
+
+        <%= user.label :password_confirmation %>
+        <%= user.password_field :password_confirmation, class: "form-control" %>
+      <% end %>
 
       <%= user.submit @btn_text, class: "btn btn-primary" %>
     
