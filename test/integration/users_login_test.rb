@@ -44,4 +44,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path, count: 0    
   end
   
+  test "inactive accounts should not be able to log in" do
+    login_as(users(:admin_user))
+    patch user_path(@user), user: { activated: false }
+    @user.reload
+    login_as(@user)
+    assert_redirected_to root_path
+    assert_not flash.empty?
+    assert_equal session[:user_id], nil
+  end
+
 end

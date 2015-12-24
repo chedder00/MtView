@@ -3,7 +3,7 @@
   <% if admin? %>
     <%= link_to "edit", edit_role_path(role), class: "admin" %>    
     <%= link_to "delete", role, method: :delete, 
-                        data: { confirm: "Delete user #{role.name}?" },
+                        data: { confirm: "Delete role #{role.name}?" },
                         class: "admin" %>    
   <% end %>
 </li>

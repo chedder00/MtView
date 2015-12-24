@@ -25,4 +25,18 @@ class ApplicationController < ActionController::Base
     authorized?("Administrator")
   end
 
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in"
+      redirect_back_or login_url
+    end
+  end
+
+  def staff_user
+    unless authorized?("Regular User")
+      flash[:danger] = "Not authorized to view this page"
+      redirect_back_or root_url
+    end
+  end
+
 end

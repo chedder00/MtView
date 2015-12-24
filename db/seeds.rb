@@ -16,4 +16,10 @@ User.create!( name: "Root User",
               email: "root@user.com",
               role_id: controller.id,
               password: "Password1",
-              password_confirmation: "Password1")
+              password_confirmation: "Password1" )
+
+PlantState.create!(name: "Cloning")
+PlantState.create!(name: "Veg")
+PlantState.create!(name: "Bloom")
+PlantState.create!(name: "Harvest")
+PlantState.create!(name: "Mother")

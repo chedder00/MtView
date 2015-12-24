@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+mother:
+  name: Mother Plant
+  species: MyString
+  planting_date: 2015-12-23 15:08:35
+  harvest_date: 2015-12-23 15:08:35
+  plant_state_id: <%= ActiveRecord::FixtureSet.identify(:mother) %>
+
+veg:
+  name: Veging Plant
+  species: MyString
+  planting_date: 2015-12-23 15:08:35
+  harvest_date: 2015-12-23 15:08:35
+  plant_state_id: <%= ActiveRecord::FixtureSet.identify(:veg) %>

@@ -8,6 +8,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
   test "non logged in layout links" do  
     get root_path
+    assert_select "a[href=?]", login_path
     assert_template 'static_pages/home'
     assert_select "a[href=?]", root_path
     assert_select "a[href=?]", about_path
@@ -17,15 +18,20 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "logged in layout links" do
     login_as(@user)
     follow_redirect!
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", edit_user_path(@user)
     assert_select "a[href=?]", users_path, count: 0
     assert_select "a[href=?]", new_user_path, count: 0
     assert_select "a[href=?]", roles_path, count: 0
     assert_select "a[href=?]", new_role_path, count: 0
+    assert_select "a[href=?]", plants_path, count: 1
+    assert_select "a[href=?]", new_plant_path, count: 0
+    assert_select "a[href=?]", new_plant_state_path, count: 0
+    assert_select "a[href=?]", plant_states_path, count: 0
 
-    #assert_select "a[href=?]", new_role_path
-    #assert_select "a[href=?]", plant_state_path
-    #assert_select "a[href=?]", plant_path
+
     #assert_select "a[href=?]", task_path
     #assert_select "a[href=?]", note_path
     #assert_select "a[href=?]", inventory_path
@@ -34,11 +40,25 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
   test "admin layout links" do
     login_as(users(:admin_user))
     follow_redirect!
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?]", root_path, count: 2
     assert_select "a[href=?]", edit_user_path(@user), count: 0
     assert_select "a[href=?]", users_path
     assert_select "a[href=?]", new_user_path
     assert_select "a[href=?]", roles_path
     assert_select "a[href=?]", new_role_path
+    assert_select "a[href=?]", plants_path
+    assert_select "a[href=?]", new_plant_path
+    assert_select "a[href=?]", new_plant_state_path
+    assert_select "a[href=?]", plant_states_path
+  end
+
+  test "plant show page links" do
+    login_as(users(:admin_user))
+    @plant = plants(:mother)
+    get plant_path @plant
+    assert_select "a[href=?]", plant_clone_path(@plant)
   end
 
 end

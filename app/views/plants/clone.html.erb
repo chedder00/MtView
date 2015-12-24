@@ -1,0 +1,21 @@
+<% render 'shared/page_title' %>
+<h1><%= "#{@page_heading}" %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@clone, url: plant_clone_path(params[:plant_id])) do |clone| %>
+      
+      <%= render 'shared/error_messages', object: clone.object %>
+
+      <%= clone.label :clone_date, "Cloning Date" %>
+      <%= clone.date_field :clone_date %>
+
+      <%= clone.label :clone_qty, "Number of clones to make" %>
+      <%= clone.number_field :clone_qty %>
+
+      <%= clone.submit @btn_text, class: "btn btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>

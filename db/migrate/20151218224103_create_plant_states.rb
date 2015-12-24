@@ -1,8 +1,7 @@
 class CreatePlantStates < ActiveRecord::Migration
   def change
     create_table :plant_states do |t|
-      t.string :state
-      t.integer :level
+      t.string :name, index: true, unique: true
 
       t.timestamps null: false
     end

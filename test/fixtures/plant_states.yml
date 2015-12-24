@@ -1,1 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+cloning:
+  name: Cloning
+
+veg:
+  name: Veg
+
+bloom:
+  name: Bloom
+
+harvest:
+  name: Harvest
+
+mother:
+  name: Mother

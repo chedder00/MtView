@@ -5,20 +5,29 @@ reg_user:
   email: regular@user.com
   role_id: <%= ActiveRecord::FixtureSet.identify(:regular) %>
   password_digest: <%= User.digest('Password1') %>
+  activated: true
 
 admin_user:
   name: Admin User
   email: admin@user.com
   role_id: <%= ActiveRecord::FixtureSet.identify(:admin) %>
   password_digest: <%= User.digest('Password1') %>
-
+  activated: true
+  
 controller_user:
   name: Controller User
   email: controller@user.com
   role_id: <%= ActiveRecord::FixtureSet.identify(:controller) %>
   password_digest: <%= User.digest('Password1') %>
+  activated: true
 
-
+reseller_user:
+  name: Reseller User
+  email: reseller@user.com
+  role_id: <%= ActiveRecord::FixtureSet.identify(:reseller) %>
+  password_digest: <%= User.digest('Password1') %>
+  activated: true
+    
 <% 30.times do |n| %>
 user_<%= n %>:
   name: <%= "User #{n}" %>

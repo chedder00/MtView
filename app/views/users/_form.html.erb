@@ -14,6 +14,13 @@
       <%= user.label :hire_date %>
       <%= user.date_field :hire_date, class: "form-control" %>
 
+      <%= user.label :termination_date %>
+      <%= user.date_field :termination_date, class: "form-control" %>  
+    
+      <%= user.label :activated, "Account Activated", 
+                                 class: "checkbox inline" %>
+      <%= user.check_box :activated, class: "checkbox" %>
+
       <%= user.label :address %>
       <%= user.text_field :address, class: "form-control" %>
 

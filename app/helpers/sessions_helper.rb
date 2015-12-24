@@ -10,8 +10,11 @@ module SessionsHelper
   #session cookie.  The database is only hit if current user is nil otherwise
   #the current_user instance variable is returned
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
+    user = User.find_by(id: session[:user_id]) 
+    if(user && user.activated?)
+      @current_user = user
+    end
+  end 
 
   #checks to see if user is logged into the system by returning whether or not
   #the current_user variable is set

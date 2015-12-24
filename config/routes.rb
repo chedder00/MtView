@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :users
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :roles
-  resources :plant_states  
+  resources :plant_states
+  resources :plants do
+    get  'clone' => 'plants#clone'
+    post 'clone' => 'plants#clone_create'
+  end 
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

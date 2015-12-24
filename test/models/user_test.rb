@@ -92,7 +92,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "should accept valid passwords using at least 1 uppercase character 
+  test "should accept valid passwords using at least 1 uppercase letter 
         1 lowercase letter and at least 1 number" do
     valid_passwords = %w[Mypass1
                          0checkSum

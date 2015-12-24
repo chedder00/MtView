@@ -23,6 +23,14 @@ class ActiveSupport::TestCase
     end
   end
 
+  def end_session
+    if(integration_test?)
+      delete logout_path
+    else
+      session.delete(:user_id)
+    end
+  end
+
   #Returns true only inside integration tests
   def integration_test?
     defined?(post_via_redirect)

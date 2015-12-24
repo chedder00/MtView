@@ -7,12 +7,18 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if(user && user.authenticate(params[:session][:password]))
-      login(user)
-      redirect_back_or root_path
-    else
+      if( !user.activated? )
+        flash[:danger] = "Account currently inactive"
+        session.delete(:user_id)
+      else  
+        login(user)
+      end
+      redirect_back_or root_path      
+    else      
       flash.now[:danger] = 'Invalid login information'
       render 'new'
     end
+    
   end
 
   def destroy

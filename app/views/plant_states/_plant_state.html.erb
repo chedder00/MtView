@@ -1,0 +1,9 @@
+<li>
+  <%=  "#{plant_state.name}" %>
+  <% if admin? %>
+    <%= link_to "edit", edit_plant_state_path(plant_state), class: "admin" %>    
+    <%= link_to "delete", plant_state, method: :delete, 
+                        data: { confirm: "Delete state #{plant_state.name}?" },
+                        class: "admin" %>    
+  <% end %>
+</li>

@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@plant) do |plant| %>
+      <%= render 'shared/error_messages', object: plant.object %>
+      
+      <% if admin? %>
+
+        <%= plant.label :name %>
+        <%= plant.text_field :name, class: "form-control" %>
+
+        <%= plant.label :species %>
+        <%= plant.text_field :species, class: "form-control" %>
+
+        <%= plant.label :planting_date %>
+        <%= plant.date_field :planting_date, class: "form-control" %>
+
+      <% end %>
+
+      <%= plant.label :havest_date %>
+      <%= plant.date_field :harvest_date, class: "form-control" %>      
+
+      <%= plant.label :plant_state_id %><br />
+      <%= plant.select :plant_state_id, 
+                   options_for_select(PlantState.all.map{|s|[s.name, s.id]}, 
+                                      selected: @plant.plant_state_id ) %>
+
+      <%= plant.submit @btn_text, class: "btn btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>

@@ -1,9 +1,10 @@
 class PlantStatesController < ApplicationController
+  
   def new
     @plant_state = PlantState.new
     @page_title = "New Plant State"
     @page_heading = "Create new Plant State"
-    @btn_text = "Create State"
+    @btn_text = "Add new State"
     render 'shared/form'
   end
 
@@ -11,10 +12,10 @@ class PlantStatesController < ApplicationController
     @plant_state = PlantState.new(state_params)
     @page_title = "New Plant State"
     @page_heading = "Create new Plant State"
-    @btn_text = "Create State"
+    @btn_text = "Add new State"
     if(@plant_state.save)
-      flash[:success] = "New state created"
-      redirect_to new_plant_state_path
+      flash[:success] = "State: #{@plant_state.name} created successfully"
+      redirect_to plant_states_path
     else
       render 'shared/form'
     end
@@ -30,6 +31,8 @@ class PlantStatesController < ApplicationController
   end
 
   def index
+    @page_title = "Plant States"
+    @plant_states = PlantState.paginate(page: params[:page])
   end
 
   def show
@@ -38,7 +41,7 @@ class PlantStatesController < ApplicationController
 ################## PRIVATE METHODS #############################################
 private
   def state_params
-    params.require(:plant_state).permit(:name, :state)
+    params.require(:plant_state).permit(:name)
   end
 
 end

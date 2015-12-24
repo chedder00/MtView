@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  has_one :role
+
   attr_accessor :reset_token
 
   #ensure email is lowercase before saving
