@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def staff_user
-    unless authorized?("Regular User")
+    unless authorized?("Regular Employee")
       flash[:danger] = "Not authorized to view this page"
       redirect_back_or root_url
     end

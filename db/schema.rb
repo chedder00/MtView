@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20151223232628) do
     t.integer  "cloned_from_id"
   end
 
-  add_index "plants", ["cloned_from_id"], name: "index_plants_on_cloned_from_id"
   add_index "plants", ["plant_state_id"], name: "index_plants_on_plant_state_id"
 
   create_table "roles", force: :cascade do |t|
@@ -66,6 +65,5 @@ ActiveRecord::Schema.define(version: 20151223232628) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["role_id"], name: "index_users_on_role_id"
 
 end

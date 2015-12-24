@@ -5,7 +5,7 @@ reseller:
   level: 1
 
 regular:
-  name: Regular User
+  name: Regular Employee
   level: 2
 
 inventory:

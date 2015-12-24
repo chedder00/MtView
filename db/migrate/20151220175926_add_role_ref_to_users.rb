@@ -1,5 +1,5 @@
 class AddRoleRefToUsers < ActiveRecord::Migration
   def change
-    add_reference :users, :role, index: true, foreign_key: true
+    add_column :users, :role_id, :integer, index: true, foreign_key: true
   end
 end
