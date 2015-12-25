@@ -22,7 +22,7 @@ class ItemEditTest < ActionDispatch::IntegrationTest
     old_qty = @item.quantity
     old_price = @item.price_cents
     patch inventory_item_path @item, inventory_item: { increase_qty: 5,
-                                                       price: 25.30 }
+                                                       new_price: 25.30 }
     @item.reload
     assert_not_equal old_qty, @item.quantity
     assert_equal @item.quantity, (old_qty + 5)
@@ -37,7 +37,7 @@ class ItemEditTest < ActionDispatch::IntegrationTest
     old_price = @item.price_cents
     patch inventory_item_path @item, inventory_item: { name: "New Name",
                                                        increase_qty: 5,
-                                                       price: 25.30 }
+                                                       new_price: 25.30 }
     @item.reload
     assert_not_equal old_name, @item.name
     assert_not_equal old_qty, @item.quantity
@@ -51,7 +51,7 @@ class ItemEditTest < ActionDispatch::IntegrationTest
     old_qty = @item.quantity
     old_price = @item.price_cents
     patch inventory_item_path @item, inventory_item: { increase_qty: 5,
-                                                       price: 25.30 }
+                                                       new_price: 25.30 }
     @item.reload
     assert_not_equal old_qty, @item.quantity
     assert_equal @item.quantity, (old_qty + 5)

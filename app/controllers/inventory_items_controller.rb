@@ -70,7 +70,7 @@ private
       params.require(:inventory_item).permit( :name, 
                                               :avaliable_to_reseller,
                                               :increase_qty,
-                                              :price )
+                                              :new_price )
     elsif(admin?)
       params.require(:inventory_item).permit( :name, 
                                               :avaliable_to_reseller,

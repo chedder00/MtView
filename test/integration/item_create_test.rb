@@ -14,7 +14,7 @@ class ItemCreateTest < ActionDispatch::IntegrationTest
     login_as(users(:reg_user))
     assert_no_difference "InventoryItem.count" do
       post inventory_items_path, inventory_item: { name: "A Product",
-                                                   quantity: 3 }
+                                                   increase_qty: 3 }
     end
     assert_redirected_to login_url
     assert_not flash.empty?
@@ -25,7 +25,7 @@ class ItemCreateTest < ActionDispatch::IntegrationTest
     get new_inventory_item_path
     assert_difference 'InventoryItem.count', 1 do
       post inventory_items_path, inventory_item: { name: "A Product",
-                                                   quantity: 3 }
+                                                   increase_qty: 3 }
     end
     assert_response :redirect
     follow_redirect!
@@ -39,7 +39,7 @@ class ItemCreateTest < ActionDispatch::IntegrationTest
     assert_difference 'InventoryItem.count', 1 do
       post inventory_items_path, inventory_item: { name: "A Product",
                                                    increase_qty: 3,
-                                                   price: 10.00 }
+                                                   new_price: 10.00 }
     end
     assert_response :redirect
     follow_redirect!
@@ -57,7 +57,7 @@ class ItemCreateTest < ActionDispatch::IntegrationTest
       post inventory_items_path, inventory_item: { name: "A Product",
                                                    avaliable_to_reseller: true,
                                                    increase_qty: 3,
-                                                   price: 10.00 }
+                                                   new_price: 10.00 }
     end
     assert_response :redirect
     follow_redirect!

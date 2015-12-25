@@ -59,11 +59,6 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
-  def show
-    @user = User.find(params[:id])
-    @page_title = "User #{@user.name}"
-  end
-
   def index
     @page_title = "All Users"
     @users = User.paginate(page: params[:page])

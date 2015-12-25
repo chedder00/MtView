@@ -20,8 +20,8 @@
         <% end %>
 
         <% if controller? %>
-          <%= item.label :price %>
-          <%= item.number_field :price, step: 0.01, 
+          <%= item.label :new_price %>
+          <%= item.number_field :new_price, step: 0.01, 
             value: (number_with_precision(item.object.price, precision: 2) || 0),
             class: "form-control" %>
         <% end %>

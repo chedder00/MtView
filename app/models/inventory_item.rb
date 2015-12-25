@@ -1,6 +1,6 @@
 class InventoryItem < ActiveRecord::Base
 
-attr_accessor :price, :increase_qty
+attr_accessor :new_price, :increase_qty
 
 MARKUP = 0.12
 
@@ -16,6 +16,9 @@ validates :price_cents, format: { with: /\A\d+\z/ },
                   numericality: { greater_than_or_equal_to: 0, 
                                   less_than_or_equal_to: 99999999 }
 
+monetize :price_cents
+monetize :suggested_retail_price_cents
+
   def increase_qty
     0
   end
@@ -24,13 +27,13 @@ validates :price_cents, format: { with: /\A\d+\z/ },
     self.quantity += new_qty.to_i
   end
 
-  def price
+  def new_price
     (price_cents.to_f / 100).round(2)
   end
 
-  def price=(new_price)
-    self.price_cents = ((new_price.is_a? String) ? 
-        new_price.scan(/[.0-9]/).join.to_f : new_price) * 100
+  def new_price=(_price)
+    self.price_cents = ((_price.is_a? String) ? 
+        _price.scan(/[.0-9]/).join.to_f : _price) * 100
     if avaliable_to_reseller?
       self.suggested_retail_price_cents = 
                       (price_cents + (price_cents * MARKUP)).ceil
