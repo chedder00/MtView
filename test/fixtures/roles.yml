@@ -9,7 +9,7 @@ regular:
   level: 2
 
 inventory:
-  name: Inventory User
+  name: Inventory Controller
   level: 5
 
 admin:
@@ -17,5 +17,5 @@ admin:
   level: 10
 
 controller:
-  name: controller
+  name: Controller
   level: 15

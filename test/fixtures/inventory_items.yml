@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+plant_food:
+  name: Plant Food
+  quantity: 10
+  avaliable_to_reseller: false
+  price_cents: 2750
+
+rso:
+  name: Rick Simpson Oil
+  quantity: 4
+  avaliable_to_reseller: true
+  price_cents: 4000
+  suggested_retail_price_cents: 4480

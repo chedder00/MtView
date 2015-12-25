@@ -4,38 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
-
-  def administrator_access
-    unless authorized?("Administrator")
-      store_location
-      flash[:danger] = "Unauthorized action"
-      redirect_to login_url
-    end
-  end
-
-  def controller_access
-    unless authorized?("Controller")
-      store_location
-      flash[:danger] = "Unauthorized action"
-      redirect_to login_url
-    end
-  end
-
-  def admin?
-    authorized?("Administrator")
-  end
+  include AccessControl
 
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Please log in"
       redirect_back_or login_url
-    end
-  end
-
-  def staff_user
-    unless authorized?("Regular Employee")
-      flash[:danger] = "Not authorized to view this page"
-      redirect_back_or root_url
     end
   end
 

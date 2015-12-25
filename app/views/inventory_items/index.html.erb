@@ -1,0 +1,8 @@
+<% render 'shared/page_title' %>
+<h1><%= "#{@page_heading}" %></h1>
+
+<%= will_paginate %>
+  <ul class="index">
+    <%= render @inventory_items %>
+  </ul>
+<%= will_paginate %>

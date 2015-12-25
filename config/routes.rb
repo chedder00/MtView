@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :plants do
     get  'clone' => 'plants#clone'
     post 'clone' => 'plants#clone_create'
-  end 
+  end
+
+  resources :inventory_items
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

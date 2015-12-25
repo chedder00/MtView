@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <%= form_for(@item) do |item| %>
+      <%= render 'shared/error_messages', object: item.object %>
+      
+        <% if admin? %>
+          <%= item.label :avaliable_to_reseller, class: "inline" %>
+          <%= item.check_box :avaliable_to_reseller, 
+                                class: "checkbox inline form-control" %>
+          <br /><br />
+
+          <%= item.label :name %>
+          <%= item.text_field :name, class: "form-control" %>
+        <% end %>
+
+        <% if inventory_controller? %>
+         <%= item.label :increase_qty, "Increase Quantity" %>
+         <%= item.number_field :increase_qty, class: "form-control" %>
+        <% end %>
+
+        <% if controller? %>
+          <%= item.label :price %>
+          <%= item.number_field :price, step: 0.01, 
+            value: (number_with_precision(item.object.price, precision: 2) || 0),
+            class: "form-control" %>
+        <% end %>
+
+      <%= item.submit @btn_text, class: "btn btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 reg_user:
@@ -27,6 +28,13 @@ reseller_user:
   role_id: <%= ActiveRecord::FixtureSet.identify(:reseller) %>
   password_digest: <%= User.digest('Password1') %>
   activated: true
+
+inventory_user:
+  name: Inventory User
+  email: inv@user.com
+  role_id: <%= ActiveRecord::FixtureSet.identify(:inventory) %>
+  password_digest: <%= User.digest('Password1') %>
+  activated: true  
     
 <% 30.times do |n| %>
 user_<%= n %>:

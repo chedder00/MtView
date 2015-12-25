@@ -1,7 +1,7 @@
 class PlantsController < ApplicationController
 
   before_action :administrator_access, only: [:new, :create, :destroy]
-  before_action :staff_user
+  before_action :staff_access
 
   def new
     @page_heading = "Add a Plant"
@@ -77,17 +77,17 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id])
-    @page_heading = "#{@plant.name}"
+    @page_title = @page_heading = "#{@plant.name}"
   end
 
   def index
-    @page_heading = "All Plants"
+    @page_title = @page_heading = "All Plants"
     @plants = Plant.paginate(page: params[:page])
   end
 
   def destroy
     Plant.find(params[:id]).destroy
-    flash.now[:success] = "Plant deleted"
+    flash[:success] = "Plant deleted"
     redirect_to plants_path
   end
 

@@ -15,7 +15,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", contact_path
   end
 
-  test "logged in layout links" do
+  test "staff layout links" do
     login_as(@user)
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 0
@@ -26,15 +26,16 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_user_path, count: 0
     assert_select "a[href=?]", roles_path, count: 0
     assert_select "a[href=?]", new_role_path, count: 0
-    assert_select "a[href=?]", plants_path, count: 1
+    assert_select "a[href=?]", plants_path
     assert_select "a[href=?]", new_plant_path, count: 0
     assert_select "a[href=?]", new_plant_state_path, count: 0
     assert_select "a[href=?]", plant_states_path, count: 0
+    assert_select "a[href=?]", inventory_items_path
+    assert_select "a[href=?]", new_inventory_item_path, count: 0
 
 
     #assert_select "a[href=?]", task_path
     #assert_select "a[href=?]", note_path
-    #assert_select "a[href=?]", inventory_path
   end
 
   test "admin layout links" do
@@ -52,10 +53,12 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", new_plant_path
     assert_select "a[href=?]", new_plant_state_path
     assert_select "a[href=?]", plant_states_path
+    assert_select "a[href=?]", inventory_items_path
+    assert_select "a[href=?]", new_inventory_item_path
   end
 
   test "plant show page links" do
-    login_as(users(:admin_user))
+    login_as(users(:reg_user))
     @plant = plants(:mother)
     get plant_path @plant
     assert_select "a[href=?]", plant_clone_path(@plant)

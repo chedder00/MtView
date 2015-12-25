@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     @page_title = "Edit User"
     @btn_text = "Update user"
     @page_heading = "Edit User #{@user.name}"
-    if @user.update_attributes!(user_params)
+    if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       redirect_to root_path
     else

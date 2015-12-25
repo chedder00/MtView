@@ -1,4 +1,6 @@
 class PlantStatesController < ApplicationController
+
+  before_action :administrator_access
   
   def new
     @plant_state = PlantState.new

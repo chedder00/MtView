@@ -1,10 +1,10 @@
 class RolesController < ApplicationController
   
-  #Ensures all pages are only accessed by administrator or higher users
   before_action :administrator_access
 
   def new
     @role = Role.new
+    @page_title = "Add Role"
     @page_heading = "Create User Role"
     @btn_text = "Create Role"
     render 'shared/form'
@@ -12,6 +12,7 @@ class RolesController < ApplicationController
 
   def create
     @role = Role.new(role_params)
+    @page_title = "Add Role"
     @page_heading = "Create User Role"
     @btn_text = "Create Role"
     if(@role.save)
@@ -24,14 +25,14 @@ class RolesController < ApplicationController
 
   def edit
     @role = Role.find(params[:id])
-    @page_heading = "Edit Role"
+    @page_title = @page_heading = "Edit Role"
     @btn_text = "Update Role"
     render 'shared/form'
   end
 
   def update
     @role = Role.find(params[:id])
-    @page_heading = "Edit Role"
+    @page_title = @page_heading = "Edit Role"
     @btn_text = "Update Role"
     if(@role.update_attributes(role_params))
       flash.now[:success] = "#{@role.name} successfully updated"
@@ -43,13 +44,13 @@ class RolesController < ApplicationController
 
   def destroy
     Role.find(params[:id]).destroy
-    flash.now[:success] = "Role deleted"
+    flash[:success] = "Role deleted"
     redirect_to roles_path
   end
 
   def index
     @roles = Role.paginate(page: params[:page])
-    @page_title = "User Roles"
+    @page_title = @page_heading = "User Roles"
   end
 
 ################## PRIVATE METHODS #############################################

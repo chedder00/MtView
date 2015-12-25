@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223232628) do
+ActiveRecord::Schema.define(version: 20151224223510) do
+
+  create_table "inventory_items", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "quantity",                        default: 0
+    t.boolean  "avaliable_to_reseller",           default: false
+    t.integer  "price_cents",                     default: 0,     null: false
+    t.string   "price_currency",                  default: "USD", null: false
+    t.integer  "suggested_retail_price_cents",    default: 0,     null: false
+    t.string   "suggested_retail_price_currency", default: "USD", null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "inventory_items", ["name"], name: "index_inventory_items_on_name"
 
   create_table "plant_states", force: :cascade do |t|
     t.string   "name"
