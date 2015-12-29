@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  has_one :role
+  has_many :tasks, dependent: :nullify
 
   attr_accessor :reset_token
 

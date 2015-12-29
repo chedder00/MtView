@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: First Task
+  description: MyText
+  plant_id: <%= ActiveRecord::FixtureSet.identify(:mother) %>
+  user_id: <%= ActiveRecord::FixtureSet.identify(:reg_user) %>
+
+two:
+  name: Second Task
+  description: MyText
+  plant_id: <%= ActiveRecord::FixtureSet.identify(:mother) %>

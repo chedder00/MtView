@@ -78,6 +78,8 @@ class PlantsController < ApplicationController
   def show
     @plant = Plant.find(params[:id])
     @page_title = @page_heading = "#{@plant.name}"
+    @task = @plant.tasks.new
+    @tasks = @plant.tasks.paginate(page: params[:page])
   end
 
   def index

@@ -1,0 +1,18 @@
+<%= form_for(@task) do |task| %>
+  <%= render 'shared/error_messages', object: task.object %>
+
+  <%= hidden_field_tag :plant_id, @task.plant_id %>
+  
+  <%= task.label :name %>
+  <%= task.text_field :name, class: "form-control" %>
+
+  <%= task.label :description %>
+  <%= task.text_area :description, class: "form-control" %>
+
+  <%= task.label :user, "Assigned to" %><br />
+  <%= task.select :user_id, 
+      options_for_select(User.all.map{|s|[s.name, s.id]}, 
+      selected: @task.user_id ), include_blank: true %>
+
+  <%= task.submit @btn_text, class: "btn btn-primary" %>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151224223510) do
+ActiveRecord::Schema.define(version: 20151225223819) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "name"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(version: 20151224223510) do
 
   add_index "roles", ["level"], name: "index_roles_on_level", unique: true
   add_index "roles", ["name"], name: "index_roles_on_name", unique: true
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.integer  "plant_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tasks", ["plant_id", "created_at"], name: "index_tasks_on_plant_id_and_created_at"
+  add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

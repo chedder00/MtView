@@ -8,6 +8,7 @@
     
     <section class="plant actions">
       <%= link_to "Clone plant", plant_clone_path(@plant) %><br />
+      <%= link_to "Add Task", new_plant_task_path(@plant) %><br />
       <%= link_to "Add testing record", "#" %><br />
     </section>
   
@@ -28,12 +29,13 @@
     <% end %>
     <p>Current State: <%= current_state(@plant.plant_state_id) %></p>
     
-    <% if !@plant.cloned_from_id.nil? %>
+    <% if parent_found?(@plant.cloned_from_id) %>
       <p>
         Cloned From: <%= link_to cloned_from(@plant.cloned_from_id), 
                          plant_path(@plant.cloned_from_id) %>
       </p>
     <% end %>
+      <%= render 'tasks' %>
   </div>
 
 </div>

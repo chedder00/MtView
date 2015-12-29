@@ -2,15 +2,18 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   
-  resources :users
+  resources :users do
+    resources :tasks, only: :index
+  end
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :roles
   resources :plant_states
   resources :plants do
+    resources :tasks
     get  'clone' => 'plants#clone'
     post 'clone' => 'plants#clone_create'
   end
-
+  resources :tasks
   resources :inventory_items
 
   get    'login'   => 'sessions#new'

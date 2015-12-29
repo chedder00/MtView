@@ -62,6 +62,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     @plant = plants(:mother)
     get plant_path @plant
     assert_select "a[href=?]", plant_clone_path(@plant)
+    assert_select "a[href=?]", new_plant_task_path(@plant)
   end
 
 end

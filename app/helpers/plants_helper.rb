@@ -7,8 +7,15 @@ module PlantsHelper
   end
 
   def cloned_from(id)
-    if(@cloned = Plant.find_by(id: id))
-      @cloned.name
+    Plant.find_by(id: id).name
+  end
+
+  def parent_found?(id)
+    @parent = Plant.find_by(id: id)
+    if(@parent)
+      return true
+    else
+      return false
     end
   end
   
