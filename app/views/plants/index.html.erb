@@ -2,8 +2,10 @@
 <h1><%= "#{@page_heading}" %></h1>
 <br />
 
-<%= will_paginate %>
-  <ul class="index">
-    <%= render @plants %>
-  </ul>
-<%= will_paginate %>
+<%= render 'group', object: @cloning, title: "Cloning" %>
+<hr />
+<%= render 'group', object: @veging, title: "In Veg" %>
+<hr />
+<%= render 'group', object: @blooming, title: "In Bloom" %>
+<hr />
+<%= render 'group', object: @mothers, title: "Mother Plants" %>

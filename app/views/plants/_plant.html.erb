@@ -1,5 +1,5 @@
 <li>
-  <%= link_to plant.name, plant %>
+  <%= link_to "#{plant.serial_number} - #{plant.name}", plant %> 
   <%= link_to "edit", edit_plant_path(plant), class: "admin" %>
   <% if admin? %>    
     <%= link_to "delete", plant, method: :delete, 

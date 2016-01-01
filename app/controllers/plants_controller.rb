@@ -17,7 +17,7 @@ class PlantsController < ApplicationController
     @btn_text = "Create Plant"
     @plant = Plant.new(plant_params)
     if(@plant.save)
-      flash.now[:success] = "Record for #{@plant.name} created successfully"
+      flash[:success] = "Record for #{@plant.name} created successfully"
       redirect_to @plant
     else
       render 'shared/form'
@@ -38,7 +38,7 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     @page_heading = "Edit #{@plant.name}"
     if(@plant.update_attributes(plant_params))
-      flash.now[:success] = "#{@plant.name} updated successfully"
+      flash[:success] = "#{@plant.name} updated successfully"
       redirect_to @plant
     else
       render 'shared/form'
@@ -84,7 +84,12 @@ class PlantsController < ApplicationController
 
   def index
     @page_title = @page_heading = "All Plants"
-    @plants = Plant.paginate(page: params[:page])
+    @cloning = Plant.where(plant_state_id: PlantState.find_by(name: "Cloning").id).paginate(page: params[:page])
+    @veging = Plant.where(plant_state_id: PlantState.find_by(name: "Veg").id).paginate(page: params[:page])
+    @blooming = Plant.where(plant_state_id: PlantState.find_by(name: "Bloom").id).paginate(page: params[:page])
+    @mothers = Plant.where(plant_state_id: PlantState.find_by(name: "Mother").id).paginate(page: params[:page])
+    #@veging = Plant.where(plant_state_id: 2).paginate(page: params[:page])
+    @plants = Plant.order('plant_state_id').paginate(page: params[:page])
   end
 
   def destroy
@@ -112,5 +117,9 @@ private
 
   def clone_params
     params.require(:clone).permit(:clone_date, :clone_qty)
+  end
+
+  def generate_serial_number(plant)
+    plant.name[0..2].upcase + plant.planting_date.strftime("%m%d%y") + plant.id.to_s
   end
 end

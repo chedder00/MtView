@@ -2,7 +2,8 @@
   <%= link_to task.name, task %>
   <% if !task.plant_id.nil? %>
     <%= link_to "edit", 
-        edit_plant_task_path(id: task.id, plant_id: task.plant_id), class: "admin" %>
+        edit_plant_task_path(id: task.id, 
+                             plant_id: task.plant_id), class: "admin" %>
   <% end %>
   <% if admin? %>    
     <%= link_to "delete", task, method: :delete, 

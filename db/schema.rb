@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225223819) do
+ActiveRecord::Schema.define(version: 20160101002226) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20151225223819) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "cloned_from_id"
+    t.string   "serial_number"
   end
 
   add_index "plants", ["plant_state_id"], name: "index_plants_on_plant_state_id"

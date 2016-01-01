@@ -7,7 +7,7 @@ module PlantsHelper
   end
 
   def cloned_from(id)
-    Plant.find_by(id: id).name
+    Plant.find_by(id: id).serial_number
   end
 
   def parent_found?(id)

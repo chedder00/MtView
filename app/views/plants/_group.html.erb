@@ -1,0 +1,10 @@
+<% if !object.first.nil? %>
+  <h1><%= title %></h1>
+  <% object.each do |obj| %>
+  <%= will_paginate object %>
+    <ul class="index">
+      <%= render obj %>
+    </ul>
+  <%= will_paginate object %>
+  <% end %>
+<% end %>
