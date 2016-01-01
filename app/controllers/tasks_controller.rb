@@ -7,7 +7,12 @@ class TasksController < ApplicationController
     @page_title = "New Task"
     @page_heading = "Create new Task"
     @btn_text = "Create Task"
-    @task = Plant.find(params[:plant_id]).tasks.new
+    @plant = Plant.find_by(id: params[:plant_id])
+    if(@plant)
+      @task = Plant.find(params[:plant_id]).tasks.new
+    else
+      @task = Task.new
+    end
     render 'shared/form'
   end
 
@@ -15,11 +20,19 @@ class TasksController < ApplicationController
     @page_title = "New Task"
     @page_heading = "Create new Task"
     @btn_text = "Create Task"
-    @plant = Plant.find(params[:plant_id]) 
-    @task = @plant.tasks.new(task_params)
+    @plant = Plant.find_by(id: params[:plant_id])
+    if(@plant) 
+      @task = @plant.tasks.new(task_params)
+    else
+      @task = Task.new(task_params)
+    end
     if(@task.save)
       flash[:success] = "Task Created"
-      redirect_to @plant
+      if(@plant)
+        redirect_to @plant
+      else
+        redirect_to root_url
+      end
     else
       render 'shared/form'
     end

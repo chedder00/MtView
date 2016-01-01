@@ -88,8 +88,6 @@ class PlantsController < ApplicationController
     @veging = Plant.where(plant_state_id: PlantState.find_by(name: "Veg").id).paginate(page: params[:page])
     @blooming = Plant.where(plant_state_id: PlantState.find_by(name: "Bloom").id).paginate(page: params[:page])
     @mothers = Plant.where(plant_state_id: PlantState.find_by(name: "Mother").id).paginate(page: params[:page])
-    #@veging = Plant.where(plant_state_id: 2).paginate(page: params[:page])
-    @plants = Plant.order('plant_state_id').paginate(page: params[:page])
   end
 
   def destroy
