@@ -1,4 +1,5 @@
 <li>
+  <%= task.updated_at.strftime("%m/%d/%y") %> - 
   <%= link_to task.name, task %>
     <%= link_to "edit", edit_task_path(task), class: "admin" %>
   <% if admin? %>    

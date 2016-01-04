@@ -14,12 +14,7 @@
       <h2>Notes</h2>
       <%= will_paginate @notes %>
       <ul class="index">
-        <% @notes.each do |n| %>
-          <li>
-            <%= n.updated_at.strftime("%m/%d/%y") %> -
-            <%= link_to n.message, note_path(n) %>
-          </li>
-        <% end %>
+        <%= render @notes %>
       </ul>
     </div>
   </div>
