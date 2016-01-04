@@ -4,17 +4,23 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :tasks, only: :index
+    resources :notes
   end
   resources :password_resets, only: [:new, :create, :edit, :update]
-  resources :roles
+  resources :roles, only: :index
   resources :plant_states
   resources :plants do
     resources :tasks
+    resources :notes
+    resources :measurements, except: [:show, :index]
     get  'clone' => 'plants#clone'
     post 'clone' => 'plants#clone_create'
   end
   resources :tasks
-  resources :inventory_items
+  resources :inventory_items do
+    resources :notes
+  end
+  resources :notes
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'

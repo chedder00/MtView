@@ -19,7 +19,7 @@ User.create!( name: "Root User",
               password_confirmation: "Password1" )
 
 PlantState.create!(name: "Cloning")
-PlantState.create!(name: "Veg")
-PlantState.create!(name: "Bloom")
-PlantState.create!(name: "Harvest")
+PlantState.create!(name: "In Veg")
+PlantState.create!(name: "In Bloom")
+PlantState.create!(name: "Harvesting")
 PlantState.create!(name: "Mother")

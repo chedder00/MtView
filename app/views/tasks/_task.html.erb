@@ -1,10 +1,6 @@
 <li>
   <%= link_to task.name, task %>
-  <% if !task.plant_id.nil? %>
-    <%= link_to "edit", 
-        edit_plant_task_path(id: task.id, 
-                             plant_id: task.plant_id), class: "admin" %>
-  <% end %>
+    <%= link_to "edit", edit_task_path(task), class: "admin" %>
   <% if admin? %>    
     <%= link_to "delete", task, method: :delete, 
                         data: { confirm: "Delete task #{task.name}?" },

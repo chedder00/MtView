@@ -30,6 +30,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_not is_logged_in?
     assert_redirected_to root_url
     follow_redirect!
+    assert_redirected_to login_url
+    follow_redirect!
     assert_select "a[href=?]", login_path, count: 1
     assert_select "a[href=?]", root_path, count: 1
     assert_select "a[href=?]", logout_path, count: 0
@@ -38,6 +40,8 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     #browser window
     delete logout_path #simulate logging out from second browser window
     assert_redirected_to root_url
+    follow_redirect!
+    assert_redirected_to login_url
     follow_redirect!
     assert_select "a[href=?]", login_path, count: 1
     assert_select "a[href=?]", root_path, count: 1

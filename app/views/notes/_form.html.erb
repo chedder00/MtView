@@ -1,0 +1,21 @@
+<div class="row">
+  <div name="note_form" class="col-md-6 col-md-offset-3">
+    <%= form_for(@note) do |note| %>
+      <%= render 'shared/error_messages', object: note.object %>
+      
+      <%= hidden_field_tag :user_id, @note.user_id %>
+      <%= hidden_field_tag :plant_id, @note.plant_id %>
+      <%= hidden_field_tag :inventory_item_id, @note.inventory_item_id %>
+      <% if @note.id? %>
+        <%= note.label :closed, class: "inline" %>
+        <%= note.check_box :closed, class: "checkbox inline form-control" %>
+        <br /><br />
+      <% end %>
+
+      <%= note.label :message %>
+      <%= note.text_area :message, class: "form-control" %>
+
+      <%= note.submit @btn_text, class: "btn btn-primary" %>
+    <% end %>   
+  </div>
+</div>

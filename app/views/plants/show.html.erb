@@ -4,39 +4,10 @@
 
 <div class="row">
 
-  <aside class="col-md-4">
-    
-    <section class="plant actions">
-      <%= link_to "Clone plant", plant_clone_path(@plant) %><br />
-      <%= link_to "Add Task", new_plant_task_path(@plant) %><br />
-      <%= link_to "Add testing record", "#" %><br />
-    </section>
-  
-  </aside>
+  <%= render 'show_links' %>
 
-  <div class="col-md-8">
+  <%= render 'show_body' %>
 
-    <p>Serial Number: <%= @plant.serial_number %></p>
-    <p>Name: <%= @plant.name %> </p>
-    <p>Species: <%= @plant.species %> </p>
-    <p>Planting Date: <%= @plant.planting_date.strftime("%m/%d/%Y") %> </p>
-    <p>Estimated Harvest Date: 
-      <%= (@plant.planting_date + 90.days).strftime("%m/%d/%Y") %> 
-    </p>
-    <% if !@plant.harvest_date.nil? %>
-      <p>
-        Actual Harvest Date: <%= @plant.harvest_date.strftime("%m/%d/%Y") %>
-      </p>
-    <% end %>
-    <p>Current State: <%= current_state(@plant.plant_state_id) %></p>
-    
-    <% if parent_found?(@plant.cloned_from_id) %>
-      <p>
-        Cloned From: <%= link_to cloned_from(@plant.cloned_from_id), 
-                         plant_path(@plant.cloned_from_id) %>
-      </p>
-    <% end %>
-      <%= render 'tasks' %>
-  </div>
+  <%= render 'show_resources' %>
 
 </div>

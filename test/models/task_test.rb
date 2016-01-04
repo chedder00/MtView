@@ -21,11 +21,5 @@ class TaskTest < ActiveSupport::TestCase
     @task.name = "a" * 101
     assert_not @task.valid?
   end
-
-  test "task should be associated with a plant" do
-    @task.plant_id = nil
-    assert_not @task.valid?
-  end
-
   
 end

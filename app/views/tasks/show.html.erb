@@ -13,7 +13,8 @@
     <% end %>
 
     <% if !@task.plant.nil? %>
-      <p>Task For: <%= @task.plant.name %></p>
+      <p>Task For: <%= link_to @task.plant.serial_number,
+                               plant_path(@task.plant) %></p>
     <% end %>    
     
   </div>

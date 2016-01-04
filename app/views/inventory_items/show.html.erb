@@ -18,6 +18,16 @@
         <%= humanized_money_with_symbol @item.suggested_retail_price %>
       </p>
     <% end %>    
-    
+    <br />
+    <div class="index">
+      <h2 class="section">
+        Notes <%= link_to 'add', new_inventory_item_note_path(@item) %>
+      </h2>
+      <%= will_paginate @notes %>
+      <ul class="notes">
+        <%= render @notes %>
+      </ul>
+    </div>
+
   </div>
 </div>

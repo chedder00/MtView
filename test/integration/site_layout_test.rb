@@ -8,8 +8,10 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
   test "non logged in layout links" do  
     get root_path
+    assert_response :redirect
+    follow_redirect!
     assert_select "a[href=?]", login_path
-    assert_template 'static_pages/home'
+    assert_template 'sessions/new'
     assert_select "a[href=?]", root_path
     assert_select "a[href=?]", about_path
     assert_select "a[href=?]", contact_path
@@ -25,7 +27,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", users_path, count: 0
     assert_select "a[href=?]", new_user_path, count: 0
     assert_select "a[href=?]", roles_path, count: 0
-    assert_select "a[href=?]", new_role_path, count: 0
+    #assert_select "a[href=?]", new_role_path, count: 0
     assert_select "a[href=?]", plants_path
     assert_select "a[href=?]", new_plant_path, count: 0
     assert_select "a[href=?]", new_plant_state_path, count: 0
@@ -48,7 +50,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", users_path
     assert_select "a[href=?]", new_user_path
     assert_select "a[href=?]", roles_path
-    assert_select "a[href=?]", new_role_path
+    #assert_select "a[href=?]", new_role_path
     assert_select "a[href=?]", plants_path
     assert_select "a[href=?]", new_plant_path
     assert_select "a[href=?]", new_plant_state_path
@@ -61,6 +63,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     login_as(users(:reg_user))
     @plant = plants(:mother)
     get plant_path @plant
+    assert_select "a[href=?]", edit_plant_path(@plant)
     assert_select "a[href=?]", plant_clone_path(@plant)
     assert_select "a[href=?]", new_plant_task_path(@plant)
   end

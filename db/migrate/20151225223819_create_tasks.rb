@@ -8,6 +8,7 @@ class CreateTasks < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :tasks, [:plant_id, :created_at]
+    add_index :tasks, [:plant_id, :updated_at]
+    add_index :tasks, [:user_id, :updated_at]
   end
 end

@@ -1,0 +1,12 @@
+<aside class="col-md-2">
+
+  <section class="plant actions">
+    <%= link_to "Edit #{@plant.name}", edit_plant_path(@plant) %><br />
+    <%= link_to "Clone plant", plant_clone_path(@plant) %><br />
+    <%= link_to "Add Task", new_plant_task_path(@plant) %><br />
+    <%= link_to "Add Note", new_plant_note_path(@plant) %><br />
+    <%= link_to "Add Measurement", new_plant_measurement_path(@plant) %><br />
+    <%= link_to "Add testing record", "#" %><br />
+  </section>
+
+</aside>

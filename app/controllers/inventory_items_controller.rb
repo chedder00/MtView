@@ -49,6 +49,7 @@ class InventoryItemsController < ApplicationController
   def show
     @item = InventoryItem.find(params[:id])
     @page_title = @page_heading = @item.name
+    @notes = @item.notes.paginate(page: params[:page])
   end
 
   def index

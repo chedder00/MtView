@@ -79,15 +79,14 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     @page_title = @page_heading = "#{@plant.name}"
     @task = @plant.tasks.new
-    @tasks = @plant.tasks.paginate(page: params[:page])
+    @tasks = @plant.tasks.paginate(page: params[:page]).per_page(5)
+    @notes = @plant.notes.paginate(page: params[:page]).per_page(5)
+    @measurement = @plant.measurements.last
   end
 
   def index
     @page_title = @page_heading = "All Plants"
-    @cloning = Plant.where(plant_state_id: PlantState.find_by(name: "Cloning").id).paginate(page: params[:page])
-    @veging = Plant.where(plant_state_id: PlantState.find_by(name: "Veg").id).paginate(page: params[:page])
-    @blooming = Plant.where(plant_state_id: PlantState.find_by(name: "Bloom").id).paginate(page: params[:page])
-    @mothers = Plant.where(plant_state_id: PlantState.find_by(name: "Mother").id).paginate(page: params[:page])
+    @plants = Plant.order('plant_state_id').paginate(page: params[:page])
   end
 
   def destroy

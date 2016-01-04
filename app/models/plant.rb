@@ -3,6 +3,8 @@ class Plant < ActiveRecord::Base
   after_save :set_serial_number
 
   has_many :tasks, dependent: :nullify
+  has_many :notes, dependent: :nullify
+  has_many :measurements, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :planting_date, presence: true

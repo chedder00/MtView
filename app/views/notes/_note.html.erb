@@ -1,0 +1,18 @@
+<li>
+  <div class="col-md-1">
+    <%= note.updated_at.strftime("%m/%d/%y") %> 
+    <br />
+    <%= link_to "edit", edit_note_path(note), class: "admin" %>
+    <% if admin? %>    
+      <%= link_to "delete", note, method: :delete, 
+                        data: { confirm: "Delete note?" },
+                        class: "admin" %>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <%= link_to note.message, note %>
+  </div>
+  
+  
+
+</li>

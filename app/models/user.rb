@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   has_many :tasks, dependent: :nullify
-
+  has_many :notes, dependent: :nullify
+  
   attr_accessor :reset_token
 
   #ensure email is lowercase before saving

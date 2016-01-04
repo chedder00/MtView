@@ -1,5 +1,7 @@
 class InventoryItem < ActiveRecord::Base
 
+has_many :notes, dependent: :nullify
+
 attr_accessor :new_price, :increase_qty
 
 MARKUP = 0.12

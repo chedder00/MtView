@@ -1,9 +1,17 @@
+<%= set_heading(plant.plant_state_id).html_safe %>
 <li>
-  <%= link_to "#{plant.serial_number} - #{plant.name}", plant %> 
-  <%= link_to "edit", edit_plant_path(plant), class: "admin" %>
-  <% if admin? %>    
-    <%= link_to "delete", plant, method: :delete, 
-                        data: { confirm: "Delete plant #{plant.name}?" },
-                        class: "admin" %>
-  <% end %>
+  
+  <div class="col-md-3 col-md-offset-1">
+    <%= link_to "#{plant.serial_number} - #{plant.name}", plant %> 
+  </div>
+  <div class="col-md-3 col-md-offset-1">
+    <%= link_to "edit", edit_plant_path(plant), class: "admin" %> |
+    <%= link_to "add task", new_plant_task_path(plant), class: "admin" %> |
+    <% if admin? %>    
+      <%= link_to "delete", plant, method: :delete, 
+                          data: { confirm: "Delete plant #{plant.name}?" },
+                          class: "admin" %>
+    <% end %>
+  </div>
+
 </li>

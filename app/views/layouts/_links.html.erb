@@ -13,7 +13,6 @@
           <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
           <li class="divider"></li>
           <li><%= link_to "View user roles", roles_path %></li>
-          <li><%= link_to "Add new role", new_role_path %></li>
         <% else %>
           <!-- Non admin users only have the ability to change password -->
           <li>
@@ -60,8 +59,12 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       Notes <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><%= link_to "View my open notes", "#" %></li>
-        <li><%= link_to "Add new note", "#" %></li>
+        <li>
+          <%= link_to "View my open notes", user_notes_path(current_user) %>
+        </li>
+        <li>
+          <%= link_to "Add new note", new_user_note_path(current_user) %>
+        </li>
       </ul>
     </li>
 

@@ -1,3 +1,26 @@
 <% render 'shared/page_title' %>
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<h1><%= "#{@page_heading}" %></h1>
+<br />
+<% if staff? %>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1">
+      <h2>Tasks</h2>
+      <%= will_paginate @tasks %>
+      <ul class="index">
+        <%= render @tasks %>
+      </ul>
+    </div>
+    <div class="col-md-5 col-md-offset-1">
+      <h2>Notes</h2>
+      <%= will_paginate @notes %>
+      <ul class="index">
+        <% @notes.each do |n| %>
+          <li>
+            <%= n.updated_at.strftime("%m/%d/%y") %> -
+            <%= link_to n.message, note_path(n) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>

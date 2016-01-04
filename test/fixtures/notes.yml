@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  message: MyText
+  plant_id: 
+  user_id: 
+  inventory_item_id: 
+
+two:
+  message: MyText
+  plant_id: 
+  user_id: 
+  inventory_item_id: 

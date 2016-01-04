@@ -2,8 +2,10 @@
 <h1><%= "#{@page_heading}" %></h1>
 <br />
 
-<%= will_paginate %>
-  <ul class="index">
+<table class="index">
+<tr>
+  <th>Name</th>
+  <th>Level</th>
+<tr>
     <%= render @roles %>
-  </ul>
-<%= will_paginate %>
+</table>

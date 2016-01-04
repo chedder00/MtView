@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160101002226) do
+ActiveRecord::Schema.define(version: 20160104010037) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,33 @@ ActiveRecord::Schema.define(version: 20160101002226) do
   end
 
   add_index "inventory_items", ["name"], name: "index_inventory_items_on_name"
+
+  create_table "measurements", force: :cascade do |t|
+    t.float    "base",       default: 0.0
+    t.float    "height",     default: 0.0
+    t.integer  "plant_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "measurements", ["plant_id"], name: "index_measurements_on_plant_id"
+
+  create_table "notes", force: :cascade do |t|
+    t.text     "message"
+    t.integer  "plant_id"
+    t.integer  "user_id"
+    t.integer  "inventory_item_id"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.boolean  "closed",            default: false
+  end
+
+  add_index "notes", ["inventory_item_id", "updated_at"], name: "index_notes_on_inventory_item_id_and_updated_at"
+  add_index "notes", ["inventory_item_id"], name: "index_notes_on_inventory_item_id"
+  add_index "notes", ["plant_id", "updated_at"], name: "index_notes_on_plant_id_and_updated_at"
+  add_index "notes", ["plant_id"], name: "index_notes_on_plant_id"
+  add_index "notes", ["user_id", "updated_at"], name: "index_notes_on_user_id_and_updated_at"
+  add_index "notes", ["user_id"], name: "index_notes_on_user_id"
 
   create_table "plant_states", force: :cascade do |t|
     t.string   "name"
@@ -68,8 +95,9 @@ ActiveRecord::Schema.define(version: 20160101002226) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "tasks", ["plant_id", "created_at"], name: "index_tasks_on_plant_id_and_created_at"
+  add_index "tasks", ["plant_id", "updated_at"], name: "index_tasks_on_plant_id_and_updated_at"
   add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"
+  add_index "tasks", ["user_id", "updated_at"], name: "index_tasks_on_user_id_and_updated_at"
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: :cascade do |t|
