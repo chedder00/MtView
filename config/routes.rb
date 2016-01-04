@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   
-  resources :users do
+  resources :users, except: :show do
     resources :tasks, only: :index
     resources :notes
   end
