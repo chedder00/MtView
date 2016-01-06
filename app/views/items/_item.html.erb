@@ -1,0 +1,11 @@
+<li>
+  <%= link_to item.inventory_item.name, 
+              inventory_item_path(item.inventory_item_id) %>
+  <% if staff? %>
+    <%= link_to "return unused to stock", item_return_path(item), 
+                class: "admin" %> |
+  <% end %>
+  <%= link_to "delete", item_path(id: item.id), method: :delete, 
+                                   data: { confirm: "Delete item?" }, 
+                                   class: "admin" %>
+</li>

@@ -31,7 +31,7 @@ class TasksController < ApplicationController
       if(@plant)
         redirect_to @plant
       else
-        redirect_to root_url
+        redirect_to @task
       end
     else
       render 'shared/form'
@@ -69,6 +69,9 @@ class TasksController < ApplicationController
     @plant = Plant.find_by(id: params[:plant_id])
     @task = Task.find(params[:id])
     @page_title = @page_heading = "#{@task.name}"
+    @item = @task.items.build
+    @items = @task.items.all
+    @avaliable = InventoryItem.all
   end
 
   def index

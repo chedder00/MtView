@@ -1,0 +1,11 @@
+<%= form_for(@item, url: user_order_items_path(@order)) do |item| %>
+
+  <%= item.label :inventory_item_id, "Item" %><br />
+  <%= item.select :inventory_item_id, 
+      options_for_select(InventoryItem.resale.map{|s|[s.name, s.id]}) %>
+  
+  <%= item.label :quantity %>
+  <%= item.number_field :quantity %>
+
+  <%= item.submit "Add item", class: "btn btn-primary" %>
+<% end %>

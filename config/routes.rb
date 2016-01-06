@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   resources :users, except: :show do
     resources :tasks, only: :index
     resources :notes
+    resources :orders, except: :new do
+      resources :items, only: :create
+    end
   end
+
+  resources :orders, only: :index
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :roles, only: :index
   resources :plant_states
@@ -16,7 +21,15 @@ Rails.application.routes.draw do
     get  'clone' => 'plants#clone'
     post 'clone' => 'plants#clone_create'
   end
-  resources :tasks
+  resources :tasks do
+    resources :items, only: [:create]
+  end
+
+  resources :items, only:[:destroy] do
+    get  'return' => 'items#return'
+    patch 'return' => 'items#return_update'
+  end
+
   resources :inventory_items do
     resources :notes
   end
@@ -29,6 +42,7 @@ Rails.application.routes.draw do
   get    'about'   => 'static_pages#about'
   get    'contact' => 'static_pages#contact'
 
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

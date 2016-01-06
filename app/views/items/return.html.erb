@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+    <p>Name: <%= @item.inventory_item.name %></p>
+    <p>Quantity alloted to task: <%= @item.quantity %></p> 
+
+    <%= form_for(@item, 
+                 url: item_return_path(item_id: @item.id)) do |item| %>
+      <%= render 'shared/error_messages', object: item.object %>
+      
+      <%= item.label :return_quantity %>
+      <%= item.number_field :return_quantity, class: "form-control" %>    
+
+      <%= item.submit "Update Task", class: "btn btn-primary" %>
+    
+    <% end %>
+  </div>
+</div>

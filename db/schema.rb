@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104010037) do
+ActiveRecord::Schema.define(version: 20160106002402) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +26,9 @@ ActiveRecord::Schema.define(version: 20160104010037) do
   end
 
   add_index "inventory_items", ["name"], name: "index_inventory_items_on_name"
+
+# Could not dump table "items" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "measurements", force: :cascade do |t|
     t.float    "base",       default: 0.0
@@ -53,6 +56,18 @@ ActiveRecord::Schema.define(version: 20160104010037) do
   add_index "notes", ["plant_id"], name: "index_notes_on_plant_id"
   add_index "notes", ["user_id", "updated_at"], name: "index_notes_on_user_id_and_updated_at"
   add_index "notes", ["user_id"], name: "index_notes_on_user_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "total_cents",    default: 0,     null: false
+    t.string   "total_currency", default: "USD", null: false
+    t.boolean  "completed",      default: false
+    t.boolean  "submitted",      default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "plant_states", force: :cascade do |t|
     t.string   "name"

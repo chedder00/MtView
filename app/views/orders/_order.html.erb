@@ -1,0 +1,20 @@
+<li>
+    <%= order.updated_at.strftime("%m/%d/%y") %> -  
+    <%= link_to order.id, user_order_path(user_id: order.user.id,
+                                          id: order.id) %>
+    <%= humanized_money_with_symbol(order.total) %>
+    
+    <% if admin? %>    
+    <%= link_to "edit", edit_user_order_path(user_id: order.user.id,
+                                          id: order.id), class: "admin" %>
+    <% end %>
+
+    <% if current_user?(order.user) %>
+      <%= link_to "delete", user_order_path(user_id: order.user.id,
+                                            id: order.id), method: :delete, 
+                        data: { confirm: "Delete order?" },
+                        class: "admin" %>
+    <% end %>
+    
+    
+</li>

@@ -1,0 +1,13 @@
+<%= form_for(@item, url: url) do |item| %>
+  
+  <%= render 'shared/error_messages', object: item.object %>
+
+  <%= item.label :inventory_item_id, "Item" %><br />
+  <%= item.select :inventory_item_id, 
+      options_for_select(@avaliable.map{|s|[s.name, s.id]}) %>
+  
+  <%= item.label :quantity %>
+  <%= item.number_field :quantity, class: "form-control" %>
+
+  <%= item.submit "Add item", class: "btn btn-primary" %>
+<% end %>

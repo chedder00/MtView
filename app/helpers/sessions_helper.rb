@@ -41,6 +41,10 @@ module SessionsHelper
     user_lvl >= admin_lvl
   end
 
+  def reseller?
+    Role.find_by(name: "Reseller").level == current_user.role.level
+  end
+
   #Returns true is user is equal to current_user
   def current_user?(user)
     user == current_user

@@ -11,7 +11,7 @@
 
   <%= task.label :user, "Assigned to" %><br />
   <%= task.select :user_id, 
-      options_for_select(User.all.map{|s|[s.name, s.id]}, 
+      options_for_select(User.staff.map{|s|[s.name, s.id]}, 
       selected: @task.user_id ), include_blank: true %>
 
   <%= task.submit @btn_text, class: "btn btn-primary" %>

@@ -18,10 +18,6 @@ module AccessControl
     authorized?("Regular Employee")
   end
 
-  def reseller?
-    authorized?("Reseller")
-  end
-
   def controller_access
     unless controller?
       store_location

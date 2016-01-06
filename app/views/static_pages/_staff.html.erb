@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-5 col-md-offset-1">
+    <h2>Tasks</h2>
+    <%= will_paginate @tasks %>
+    <ul class="index">
+      <%= render @tasks %>
+    </ul>
+  </div>
+  <div class="col-md-5 col-md-offset-1">
+    <h2>Notes</h2>
+    <%= will_paginate @notes %>
+    <ul class="index">
+      <%= render @notes %>
+    </ul>
+  </div>
+</div>

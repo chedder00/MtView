@@ -15,7 +15,15 @@
     <% if !@task.plant.nil? %>
       <p>Task For: <%= link_to @task.plant.serial_number,
                                plant_path(@task.plant) %></p>
-    <% end %>    
+    <% end %>
+
+    <h2 class="section">Items</h2>
+    <ul class="index">
+      <%= render @items %>
+    </ul>
+
+    <h2>Add item to task</h2>
+    <%= render 'items/form', url: task_items_path(@task) %> 
     
   </div>
 </div>

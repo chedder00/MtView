@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
 
+  belongs_to :role
+
   has_many :tasks, dependent: :nullify
   has_many :notes, dependent: :nullify
+  has_many :orders, dependent: :nullify
   
   attr_accessor :reset_token
 
@@ -42,7 +45,13 @@ class User < ActiveRecord::Base
     #return a random url safe token
     def new_token
       SecureRandom.urlsafe_base64
-    end    
+    end
+
+    def staff
+      role = Role.find_by(name: "Reseller")
+      where("role_id != ?", role)
+    end
+
   end
 
   def create_reset_digest

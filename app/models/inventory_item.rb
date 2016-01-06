@@ -1,6 +1,7 @@
 class InventoryItem < ActiveRecord::Base
 
 has_many :notes, dependent: :nullify
+has_many :items, dependent: :nullify
 
 attr_accessor :new_price, :increase_qty
 
@@ -39,6 +40,16 @@ monetize :suggested_retail_price_cents
     if avaliable_to_reseller?
       self.suggested_retail_price_cents = 
                       (price_cents + (price_cents * MARKUP)).ceil
+    end
+  end
+
+  class << self
+    def open
+      where(closed: false)
+    end
+
+    def resale
+      where(avaliable_to_reseller: true)
     end
   end
 
