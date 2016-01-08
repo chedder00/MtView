@@ -43,13 +43,27 @@ class OrdersController < ApplicationController
     @orders = Order.open.paginate(page: params[:page])
   end
 
-  def show    
+  def show  
     @order = Order.find(params[:id])
     @page_title = "Order: #{@order.id}"
     @page_heading = @page_title + " for #{@order.user.name}"
     @item = @order.items.build
     @items = @order.items.paginate(page: params[:page])
     @avaliable = InventoryItem.resale
+    if(flash.any?)
+      if(!flash[:danger].nil?)
+        flash[:danger].each do |key, msg|
+          @item.errors.add(key, msg)
+        end
+        flash.clear
+      end
+    end
+  end
+
+  def submit
+    @order = current_user.orders.find(params[:order_id])
+    @order.update_attributes(submitted: true)
+    redirect_to root_url
   end
 
 ################## PRIVATE METHODS #############################################

@@ -1,6 +1,6 @@
 <li>
-  <%= link_to item.inventory_item.name, 
-              inventory_item_path(item.inventory_item_id) %>
+  <%= "#{item.quantity}" %> - 
+  <%= link_to item.inventory_item.name, link_path(item) %>
   <% if staff? %>
     <%= link_to "return unused to stock", item_return_path(item), 
                 class: "admin" %> |

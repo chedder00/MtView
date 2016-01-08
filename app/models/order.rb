@@ -1,4 +1,7 @@
 class Order < ActiveRecord::Base
+  
+  attr_accessor :update_total
+
   belongs_to :user
 
   has_many :items, dependent: :destroy
@@ -13,6 +16,14 @@ class Order < ActiveRecord::Base
       where(completed: false)
     end
 
+    def current
+      open.where(submitted: false)
+    end
+
   end
-  
+
+  def update_total=(val)
+    self.total_cents += val.to_i
+  end
+
 end

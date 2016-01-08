@@ -48,8 +48,7 @@ class User < ActiveRecord::Base
     end
 
     def staff
-      role = Role.find_by(name: "Reseller")
-      where("role_id != ?", role)
+      where("role_id != ?", Role.find_by(name: "Reseller"))
     end
 
   end

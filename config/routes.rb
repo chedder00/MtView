@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :orders, only: :index
+  resources :orders, only: :index do
+    patch 'submit' => 'orders#submit'
+    resources :items, only: :show
+  end
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :roles, only: :index
   resources :plant_states

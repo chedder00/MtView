@@ -72,6 +72,14 @@ class TasksController < ApplicationController
     @item = @task.items.build
     @items = @task.items.all
     @avaliable = InventoryItem.all
+    if(flash.any?)
+      if(!flash[:danger].nil?)
+        flash[:danger].each do |key, msg|
+          @item.errors.add(key, msg) 
+        end
+        flash.clear
+      end      
+    end
   end
 
   def index
