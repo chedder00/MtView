@@ -29,22 +29,6 @@ module SessionsHelper
     @current_user = nil
   end
 
-  #Returns true is user level is greater than or equal to administration level
-  def authorized?(key)
-    admin_lvl = Role.find_by(name: "#{key}").level
-    if(!current_user.nil?)
-      user_lvl = Role.find(current_user.role_id).level
-    else
-      user_lvl = -1
-    end
-  
-    user_lvl >= admin_lvl
-  end
-
-  def reseller?
-    Role.find_by(name: "Reseller").level == current_user.role.level
-  end
-
   #Returns true is user is equal to current_user
   def current_user?(user)
     user == current_user
