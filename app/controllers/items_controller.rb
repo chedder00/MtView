@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
   end
 
   def return_update
+    debugger
     @item = Item.find(params[:item_id])
     @item.return_quantity = params[:item][:return_quantity]
     @item.task_number = params[:task_id]

@@ -7,7 +7,7 @@
   <div class="col-md-3 col-md-offset-1">
     <%= link_to "edit", edit_plant_path(plant), class: "admin" %> |
     <%= link_to "add task", new_plant_task_path(plant), class: "admin" %> |
-    <% if admin? %>    
+    <% if administrator? %>    
       <%= link_to "delete", plant, method: :delete, 
                           data: { confirm: "Delete plant #{plant.name}?" },
                           class: "admin" %>

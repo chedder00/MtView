@@ -2,7 +2,7 @@
 
   <li><%= link_to "Home", root_path %></li>
   <% if staff? %>
-    <% if admin? %>
+    <% if administrator? %>
       <li><%= link_to "View Orders", orders_path %></li>
     <% end %>
     
@@ -11,7 +11,7 @@
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       Users <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <% if admin? %>
+        <% if administrator? %>
           <li><%= link_to "View all users", users_path %></li>
           <li><%= link_to "Add new user", new_user_path %></li>
           <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
@@ -34,7 +34,7 @@
       <ul class="dropdown-menu">
         <li><%= link_to "View all plants", plants_path %></li>
 
-        <% if admin? %>
+        <% if administrator? %>
           <li><%= link_to "Add a Plant", new_plant_path %></li>
           <li class="divider"></li>
           <li><%= link_to "View all plant states", plant_states_path %></li>
@@ -52,7 +52,7 @@
           <%= link_to "View my open tasks", user_tasks_path(current_user) %>
           <%= link_to "Create Routine Task", new_task_path %>
         </li>
-        <% if admin? %>
+        <% if administrator? %>
           <li><%= link_to "View all tasks", tasks_path %></li>
         <% end %>
       </ul>
@@ -78,13 +78,13 @@
       Inventory <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><%= link_to "View inventory", inventory_items_path %></li>
-        <% if admin? %>
+        <% if administrator? %>
           <li><%= link_to "Add new item", new_inventory_item_path %></li>
         <% end %>
       </ul>
     </li>
   <% end %>
-  <% if reseller? %>
+  <% if reseller?(true) %>
     <li>
       <%= link_to "New Order", user_orders_path(current_user), 
                                method: :create %>

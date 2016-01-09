@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
 
-  before_action :reseller?, only: [:create, :show, :destroy], unless: :admin?
+  before_action :logged_in_user
+  before_action :reseller, only: [:create, :show, :destroy] 
   before_action :administrator_access, only: [:edit, :update, :index]
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: :destroy
 
   def create
     @order = current_user.orders.build(user_id: current_user.id)
@@ -23,8 +24,8 @@ class OrdersController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
-    @order = @user.find(params[:id])
-    if(@order.udpate_attributes(order_params))
+    @order = @user.orders.find(params[:id])
+    if(@order.update_attributes(order_params))
       flash[:success] = "Order updated"
       redirect_to root_url
     else
@@ -33,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @user.orders.find(params[:id]).destroy
+    current_user.orders.find(params[:id]).destroy
     flash[:success] = "Order deleted"
     redirect_to root_url
   end
@@ -69,13 +70,19 @@ class OrdersController < ApplicationController
 ################## PRIVATE METHODS #############################################
 private
   def order_params
-    params.require(:order).permit(:user_id, :total, :completed) if(admin?)
+    params.require(:order).permit(:completed) if(administrator?)
   end
 
   def correct_user
-    unless admin?
-      @user = User.find(params[:user_id])
-      redirect_to(root_url) unless current_user?(@user)
+    unless current_user.administrator?
+      user = User.find(params[:user_id])
+      redirect_to(root_url) unless current_user?(user)
+    end
+  end
+
+  def reseller
+    unless current_user.administrator?
+      return current_user.reseller?
     end
   end
 

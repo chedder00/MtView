@@ -98,7 +98,7 @@ class PlantsController < ApplicationController
 ################## PRIVATE METHODS #############################################
 private
   def plant_params
-    if(admin?)
+    if(administrator?)
       params.require(:plant).permit(
         :name,
         :species,

@@ -33,25 +33,6 @@ class User < ActiveRecord::Base
 
   #Ensure user has a role
   validates :role_id, presence: true
-  
-
-  class << self
-    def digest(string)
-      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
-                                                    BCrypt::Engine.cost
-      BCrypt::Password.create( string, cost: cost )
-    end
-
-    #return a random url safe token
-    def new_token
-      SecureRandom.urlsafe_base64
-    end
-
-    def staff
-      where("role_id != ?", Role.find_by(name: "Reseller"))
-    end
-
-  end
 
   def create_reset_digest
     self.reset_token = User.new_token
@@ -75,4 +56,49 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
+  def authorized?(access, strict = false)
+    access = (access == "Staff")? "Regular Employee" : access
+    @roles ||= Role.all
+    if(@role = @roles.find_by(name: access))
+      if(strict)
+        return self.role_id == @role.id
+      else
+        return self.role_id >= @role.id
+      end
+    end
+  end
+
+  #defines administrative access controll for user object
+  def method_missing(method, *args, &block)
+    @roles ||= Role.all
+    if(method.to_s.match(/_access/))
+      self.class.send :define_method, method do |arg=nil|
+        return authorized?(method.to_s.gsub('_access','').titlecase, args[0])
+        self.send(method)
+      end
+    else
+      self.class.send :define_method, method do |arg=nil|
+        return authorized?(method.to_s.gsub('?','').titlecase, args[0])
+      end
+      self.send(method)
+    end
+  end
+    
+  class << self
+    def digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
+      BCrypt::Password.create( string, cost: cost )
+    end
+
+    #return a random url safe token
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
+
+    def staff
+      where("role_id != ?", Role.find_by(name: "Reseller"))
+    end
+    
+  end
 end

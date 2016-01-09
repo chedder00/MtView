@@ -12,7 +12,6 @@ class Item < ActiveRecord::Base
   before_save :validate_item
   after_create :update_order
   after_save :return_item
-
   before_destroy :remove_item
 
   validates :quantity, numericality: { greater_than: 0 }, on: :create
@@ -38,6 +37,30 @@ class Item < ActiveRecord::Base
     @task_number = val
   end
 
+  #Should be called after a failed save because an entry for the item already
+  #exists for the current order or task.  It will update the existing item
+  #with this objects information
+  def update_current
+    if(update_existing?)
+      qty = @itm.quantity + self.quantity
+      @itm.update_column(:quantity, qty)
+      if(!@itm.order.nil?)
+        @parent.update_attributes(update_total: (self.quantity * 
+                                               @itm.purchase_price_cents))
+      end
+      self.quantity = 0
+      update_inventory(0-self.quantity)
+    end
+    #ensures returning object can be routed properly
+    update_ids
+  end
+
+  def sub_total
+    ((self.quantity.to_f * self.purchase_price_cents.to_f) / 100).to_f
+  end
+
+################## PRIVATE METHODS #############################################
+private
   def set_purchase_price
     self.purchase_price_cents = self.inventory_item.price_cents
   end
@@ -59,11 +82,15 @@ class Item < ActiveRecord::Base
     if(self.quantity == 0)
       return add_error(:quantity, "Must be greater than 0")
     elsif item_return?
+      #If returning a quantity check to make sure that return quantity
+      #is less than what was allocated to task
       unless(self.quantity >= @check_value.to_i)
         return add_error(:return_quantity, 
                          "#{self.quantity} units allocated to task")
       end
     else
+      #Check to make sure that the quantity requested is less than
+      #current inventory stock
       unless(@check_value.to_i <= self.inventory_item.quantity)
         return add_error(:quantity,
               "must be less than or equal to #{self.inventory_item.quantity}")
@@ -80,9 +107,12 @@ class Item < ActiveRecord::Base
     else
       @parent ||= Task.find(@task_number)
     end
+    #check current order items to see if item already exists
     if(@itm ||= @parent.items.find_by(inventory_item_id: self.inventory_item_id))
       return self.valid?
     end
+    #mainly for routing, adds task and order id's to object 
+    #before rejecting save
     update_ids
     return false
   end
@@ -106,29 +136,13 @@ class Item < ActiveRecord::Base
   end
 
   def remove_item
+    #called before an item is destroyed so that the order can be updated
+    #and the item's quantity is returned to stock
     if(order?)
       self.order.update_attributes(update_total: (0-(self.quantity.to_i * 
                                             self.purchase_price_cents.to_i)))
     end
     update_inventory(self.quantity)
-  end
-  
-  def sub_total
-    ((self.quantity.to_f * self.purchase_price_cents.to_f) / 100).to_f
-  end
-
-  def update_current
-    if(update_existing?)
-      qty = @itm.quantity + self.quantity
-      @itm.update_column(:quantity, qty)
-      if(!@itm.order.nil?)
-        @parent.update_attributes(update_total: (self.quantity * 
-                                               @itm.purchase_price_cents))
-      end
-      self.quantity = 0
-      update_inventory(0-self.quantity)
-    end
-    update_ids
   end
 
   def valid_return?(val)
@@ -136,7 +150,9 @@ class Item < ActiveRecord::Base
   end
 
   def order?
+    #if the termporany instance variable was set return true
     return true if !@order_number.nil?
+    #if the existing item has an order return true
     if(!self.order.nil?)
       @order_number = self.order.id
       return true
@@ -149,16 +165,20 @@ class Item < ActiveRecord::Base
     return false
   end
 
+  #adds custom errors to current item
   def add_error(attrib, msg)
     self.errors.add(attrib, msg )
     return false
   end
 
+  #used for routing object
   def update_ids
     self.task_id = @task_number
     self.order_id = @order_number
   end
 
+  #ensures that the object is free from errors, not a return and already
+  #exists in the current order or task
   def update_existing?
     !self.errors.any? && !item_return? && exists?
   end

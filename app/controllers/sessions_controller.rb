@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
   
+  skip_before_action :validate_session, only: [:new, :create]
+
   def new
     @page_title = "Login"
   end

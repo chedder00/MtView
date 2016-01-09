@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     post 'clone' => 'plants#clone_create'
   end
   resources :tasks do
+    patch 'add_item' => 'tasks#add_item'
     resources :items, only: [:create]
   end
 

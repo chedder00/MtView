@@ -3,7 +3,6 @@
 <br />
 <% if staff? %>
   <%= render 'staff' %>
-<% end %>
-<% if reseller? %>
+<% else %>
   <%= render 'reseller' %>
 <% end %>

@@ -3,7 +3,7 @@
     <%= link_to note.message, note %>
 
     <%= link_to "edit", edit_note_path(note), class: "admin" %>
-    <% if admin? %>    
+    <% if administrator? %>    
       <%= link_to "delete", note, method: :delete, 
                         data: { confirm: "Delete note?" },
                         class: "admin" %>

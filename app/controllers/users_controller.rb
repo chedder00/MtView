@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 ################## PRIVATE METHODS #############################################
 private
   def user_params
-    if(admin?)
+    if(administrator?)
       params.require(:user).permit( 
         :name, 
         :email, 
@@ -90,7 +90,7 @@ private
   end
 
   def correct_user
-    unless admin?
+    unless administrator?
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end

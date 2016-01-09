@@ -4,6 +4,7 @@ module SessionsHelper
   #browser is open
   def login(user)
     session[:user_id] = user.id
+    session[:expires_at] = Time.current + 10.minutes
   end
 
   #assigns an instance variable for the current user using the temporary
@@ -25,7 +26,7 @@ module SessionsHelper
   #logs out current user by removing session cookie user_id and setting
   #current_user variable to nill
   def logout
-    session.delete(:user_id)
+    reset_session
     @current_user = nil
   end
 

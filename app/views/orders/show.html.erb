@@ -7,8 +7,7 @@
     <section class="order_info">
       Order Total: <%= humanized_money_with_symbol(@order.total) %>
       <% if !@order.submitted? %>
-        <%= form_for(@order, 
-                     url: order_submit_path(order_id: @order.id)) do |o| %>
+        <%= form_for(@order, url: order_submit_path(@order)) do |o| %>
           <%= o.submit "Submit Order", class: "btn btn-primary" %>
         <%end %>
       <% end %>

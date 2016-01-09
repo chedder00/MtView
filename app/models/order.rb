@@ -10,6 +10,10 @@ class Order < ActiveRecord::Base
   
   monetize :total_cents
 
+  def update_total=(val)
+    self.total_cents += val.to_i
+  end
+
   class << self
     
     def open
@@ -20,10 +24,10 @@ class Order < ActiveRecord::Base
       open.where(submitted: false)
     end
 
-  end
+    def history
+      where(submitted: true)
+    end
 
-  def update_total=(val)
-    self.total_cents += val.to_i
   end
 
 end

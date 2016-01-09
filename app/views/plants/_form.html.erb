@@ -4,7 +4,7 @@
     <%= form_for(@plant) do |plant| %>
       <%= render 'shared/error_messages', object: plant.object %>
       
-      <% if admin? %>
+      <% if administrator? %>
 
         <%= plant.label :name %>
         <%= plant.text_field :name, class: "form-control" %>

@@ -3,7 +3,7 @@
   <% if inventory_controller? %>
     <%= link_to "edit", edit_inventory_item_path(inventory_item), 
                         class: "admin" %>
-    <% if admin? %>
+    <% if administrator? %>
       <%= link_to "delete", inventory_item, method: :delete, 
                       data: { confirm: "Delete item #{inventory_item.name}?" },
                       class: "admin" %>

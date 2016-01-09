@@ -70,6 +70,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @page_title = @page_heading = "#{@task.name}"
     @item = @task.items.build
+    @item.task_number = @task.id
     @items = @task.items.all
     @avaliable = InventoryItem.all
     if(flash.any?)
@@ -114,7 +115,7 @@ class TasksController < ApplicationController
 private
 
   def task_params
-    params.require(:task).permit( :name, :description, :plant_id, :user_id )
+    params.require(:task).permit( :name, :description, :plant_id, :user_id)
   end
 
 end

@@ -1,7 +1,5 @@
 module ApplicationHelper
 
-  include AccessControl
-
   #Establishes full page title for each page rendered
   def full_title(page_title = '')
     site_title = "Mountain View Medicals"
@@ -19,6 +17,14 @@ module ApplicationHelper
   
   def get_form
     "#{controller.controller_name}/form"
+  end
+
+  def method_missing(method, *args, &block)
+    return false if current_user.nil?
+    self.class.send :define_method, method do |arg=nil|
+      return current_user.send(method, *args, &block)
+    end
+    self.send(method)
   end
 
 end

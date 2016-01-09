@@ -4,7 +4,7 @@
                                           id: order.id) %>
     <%= humanized_money_with_symbol(order.total) %>
     
-    <% if admin? %>    
+    <% if administrator? %>    
     <%= link_to "edit", edit_user_order_path(user_id: order.user.id,
                                           id: order.id), class: "admin" %>
     <% end %>

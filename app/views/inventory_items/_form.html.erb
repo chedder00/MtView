@@ -4,7 +4,7 @@
     <%= form_for(@item) do |item| %>
       <%= render 'shared/error_messages', object: item.object %>
       
-        <% if admin? %>
+        <% if administrator? %>
           <%= item.label :avaliable_to_reseller, class: "inline" %>
           <%= item.check_box :avaliable_to_reseller, 
                                 class: "checkbox inline form-control" %>
