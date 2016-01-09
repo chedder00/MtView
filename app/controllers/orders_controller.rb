@@ -14,8 +14,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:user_id])
-    @order = @user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     @page_title = "Order #{@order.id}"
     @page_heading = "Edit " + @page_title
     @btn_text = "Update order #{@order.id}"
@@ -23,8 +22,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
-    @order = @user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     if(@order.update_attributes(order_params))
       flash[:success] = "Order updated"
       redirect_to root_url
