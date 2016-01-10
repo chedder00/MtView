@@ -272,10 +272,11 @@ input
     margin-bottom: 10px;
   }
 
-  &.btn-primary
+  &.btn-main
   {
     background-color: $site_theme;
     border-color: $site_accent;
+    color: $nav_text_color;
     &:hover
     {
       background-color: $site_accent;

@@ -14,5 +14,5 @@
       options_for_select(User.staff.map{|s|[s.name, s.id]}, 
       selected: @task.user_id ), include_blank: true %>
 
-  <%= task.submit @btn_text, class: "btn btn-primary" %>
+  <%= task.submit @btn_text, class: "btn btn-main" %>
 <% end %>

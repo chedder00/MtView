@@ -10,10 +10,11 @@
       <%= session.email_field :email, class: 'form-control' %>
 
       <%= session.label :password %>
-      <%= link_to "(forgot password)", new_password_reset_path %>
+      <%= link_to "(forgot password)", new_password_reset_path, 
+                  class: "site-theme-text" %>
       <%= session.password_field :password, class: 'form-control' %>
 
-      <%= session.submit "Login", class: "btn btn-primary" %>
+      <%= session.submit "Login", class: "btn btn-main" %>
 
     <% end %>
 
