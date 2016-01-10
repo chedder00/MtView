@@ -140,6 +140,7 @@ header
               {
                 color: $nav_text_color;
                 padding: 10px;
+                text-shadow: 0 2px 2px rgba(0,0,0,.3);
 
                 &:hover
                 {
@@ -172,6 +173,7 @@ header
   letter-spacing: -1px;
   font-weight: bold;
   width: 100%;
+  text-shadow: 0 3px 3px rgba(0,0,0,.3);
 
   &:hover
   {
@@ -265,6 +267,14 @@ input
 {
   height: auto !important;
   
+  &.form-control:focus
+  {
+    box-shadow: 0 0 5px rgb(79,140,0);
+    padding: 3px 0px 3px 3px;
+    margin: 5px 1px 3px 0px;
+    border: 1px solid rgb(79,140,0);
+  }
+
   &.checkbox
   {
     height: 75px;
@@ -274,12 +284,19 @@ input
 
   &.btn-main
   {
-    background-color: $site_theme;
+    background: $site_theme;
+    background: linear-gradient(rgb(79,140,0) 0%,rgb(120,170,20) 100%); 
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f8c00', endColorstr='#78aa14',GradientType=1 ); /* IE6-9 */    
+    
     border-color: $site_accent;
     color: $nav_text_color;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    
     &:hover
     {
-      background-color: $site_accent;
+      background: $site_accent;
+      color: $nav_text_color
     }
   }
 }
