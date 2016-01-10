@@ -5,7 +5,7 @@ ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 5.0.1'
 # Bootstrap framework for HTML styling
 gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets

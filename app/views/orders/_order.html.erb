@@ -9,7 +9,8 @@
                                           id: order.id), class: "admin" %>
     <% end %>
 
-    <% if current_user?(order.user) && !order.submitted? %>
+    <% if !order.submitted? &&
+          (current_user?(order.user) || current_user.controller?) %>
       <%= link_to "delete", user_order_path(user_id: order.user.id,
                                             id: order.id), method: :delete, 
                         data: { confirm: "Delete order?" },

@@ -1,14 +1,14 @@
 <% if logged_in? %>
 
-  <li><%= link_to "Home", root_path %></li>
+  <li><%= link_to "Home", root_path, class: "menu-tab" %></li>
   <% if staff? %>
     <% if administrator? %>
-      <li><%= link_to "View Orders", orders_path %></li>
+      <li><%= link_to "View Orders", orders_path, class: "menu-tab" %></li>
     <% end %>
     
     <!-- Dropdown menu for Users -->
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
       Users <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <% if administrator? %>
@@ -29,7 +29,7 @@
 
     <!-- Dropdown menu for plants -->
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
       Plants <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><%= link_to "View all plants", plants_path %></li>
@@ -45,7 +45,7 @@
 
     <!-- Dropdown menu for Tasks -->
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
       Tasks <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>
@@ -60,7 +60,7 @@
 
     <!-- Dropdown menu for Notes -->
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
       Notes <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li>
@@ -74,7 +74,7 @@
 
   <!-- Dropdown menu for Inventory -->
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
       Inventory <b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li><%= link_to "View inventory", inventory_items_path %></li>
@@ -87,13 +87,14 @@
   <% if reseller?(true) %>
     <li>
       <%= link_to "New Order", user_orders_path(current_user), 
-                               method: :create %>
+                               method: :create, class: "menu-tab" %>
     </li>
   <% end %>
 
   <li>
-    <%= link_to "#{current_user.name} (Logout)", logout_path, method: :delete %>
+    <%= link_to "#{current_user.name} (Logout)", logout_path, method: :delete,
+                                                 class: "menu-tab" %>
   </li>
 <% else %>
-  <li><%= link_to "Login", login_path %></li>
+  <li><%= link_to "Login", login_path, class: "menu-tab" %></li>
 <% end %>

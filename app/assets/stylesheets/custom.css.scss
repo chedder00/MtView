@@ -2,8 +2,15 @@
 @import "bootstrap";
 
 /* Mixins & variables*/
+$site_theme: Green;
+$site_accent: DarkGreen;
+$warning: Red;
+$nav_text_color: White;
+$small_heading: bfbfbf;
+$default_border: e6e6e6;
+$header_border: DarkGoldenRod;
+$link_color: Black;
 
-$white: #ffffff;
 
 @mixin box_sizing
 {
@@ -79,13 +86,6 @@ h1
   letter-spacing: -1px;
   margin-bottom: 0px;
   text-align: center;
-  
-  &.logo
-  {
-    color: $white;
-    text-align: left;
-    padding-left: 15px;
-  }
 }
 
 h2
@@ -95,7 +95,7 @@ h2
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $gray-light;
+  color: $small_heading;
 }
 
 p
@@ -106,13 +106,68 @@ p
 
 /* Header */
 
+header
+{
+
+  &.navbar-fixed-top
+  {
+    border-bottom: 5px outset $header_border;
+  }
+  
+
+  &.navbar-main
+  {
+    
+
+    /* Background Gradient for Header */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4f8c00+0,78aa14+100 */
+    background: linear-gradient(to right, rgb(79,140,0) 0%,rgb(120,170,20) 100%); 
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f8c00', endColorstr='#78aa14',GradientType=1 ); /* IE6-9 */
+
+
+    nav
+    {
+      ul
+      {
+        &.navbar-nav
+        {
+          li
+          { 
+            a
+            {
+              &.menu-tab
+              {
+                color: $nav_text_color;
+                padding: 10px;
+
+                &:hover
+                {
+                  border-radius: 12px 12px 0 0;
+                  background-color: $site_accent;
+                }
+
+                &:focus
+                {
+                  border-radius: 12px 12px 0 0;
+                  background-color: $site_accent;
+                }
+              }
+            }
+          }
+        }      
+      }
+    }
+  }
+}
+
 .logo
 {
   float: left;
   margin-right: 10px;
   margin-left: 20px;
   font-size: 3em;
-  color: $white;
+  color: $nav_text_color;
   text-transform: uppercase;
   letter-spacing: -1px;
   font-weight: bold;
@@ -120,7 +175,7 @@ p
 
   &:hover
   {
-    color: $white;
+    color: $nav_text_color;
     text-decoration: none;
   }
 }
@@ -131,16 +186,16 @@ footer
 {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $gray-lighter;
-  color: $gray-light;
+  border-top: 1px solid $default_border;
+  color: $small_heading;
 
   a
   {
-    color: #555;
+    color: $site_theme;
     
     &:hover
     {
-      color: #222;
+      color: $site_accent;
     }
   }
 
@@ -216,14 +271,24 @@ input
     width: 75px;
     margin-bottom: 10px;
   }
+
+  &.btn-primary
+  {
+    background-color: $site_theme;
+    border-color: $site_accent;
+    &:hover
+    {
+      background-color: $site_accent;
+    }
+  }
 }
 
 #error_explanation
 {
-  color: red;
+  color: $warning;
   ul
   {
-    color: red;
+    color: $warning;
     margin: 0 0 30px 0;
   }
 }
@@ -246,22 +311,22 @@ ul
     {
       overflow: auto;
       padding: 5px 0;
-      border-bottom: 1px solid $gray-lighter;
+      border-bottom: 1px solid $default_border;
 
       a
       {
-        color: black;
+        color: $link_color;
         &:hover
         {
-          color: green;
+          color: $site_accent;
           text-decoration: none;
         }
         &.admin
         {
-          color: blue;
+          color: $site_theme;
           &:hover
           {
-            color: red;
+            color: $warning;
           }
         }
       }
@@ -274,7 +339,7 @@ ul
     {
       &.products
       {
-        border: 1px solid green;
+        border: 1px solid $site_theme;
         padding: 5px;
         margin-left: 5px;
         margin-right: 5px;

@@ -38,7 +38,7 @@ class OrdersController < ApplicationController
 
   def index
     @page_title = @page_heading = "All Orders"
-    @orders = Order.open.paginate(page: params[:page])
+    @orders = Order.current.paginate(page: params[:page])
   end
 
   def show 
