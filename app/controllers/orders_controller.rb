@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
 
-  before_action :logged_in_user
   before_action :reseller, only: [:create, :show, :destroy] 
   before_action :administrator_access, only: [:edit, :update, :index]
   before_action :correct_user, only: :destroy
@@ -42,21 +41,14 @@ class OrdersController < ApplicationController
     @orders = Order.open.paginate(page: params[:page])
   end
 
-  def show  
+  def show 
     @order = Order.find(params[:id])
     @page_title = "Order: #{@order.id}"
     @page_heading = @page_title + " for #{@order.user.name}"
+    @btn_text = "Add to order"
     @item = @order.items.build
-    @items = @order.items.paginate(page: params[:page])
-    @avaliable = InventoryItem.resale
-    if(flash.any?)
-      if(!flash[:danger].nil?)
-        flash[:danger].each do |key, msg|
-          @item.errors.add(key, msg)
-        end
-        flash.clear
-      end
-    end
+    @items = @order.items.paginate(page: params[:page]).per_page(5)
+    @avaliable = InventoryItem.resale.paginate(page: params[:page]).per_page(10)
   end
 
   def submit

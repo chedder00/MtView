@@ -133,7 +133,7 @@ footer
   padding-top: 5px;
   border-top: 1px solid $gray-lighter;
   color: $gray-light;
-  
+
   a
   {
     color: #555;
@@ -153,11 +153,11 @@ footer
   {
     float: right;
     list-style: none;
-
     li
     {
       float: left;
       margin-left: 15px;
+
     }
   }
 }
@@ -237,6 +237,68 @@ input
   }
 }
 
+ul
+{
+  &.index
+  {
+    list-style: none;
+    li
+    {
+      overflow: auto;
+      padding: 5px 0;
+      border-bottom: 1px solid $gray-lighter;
+
+      a
+      {
+        color: black;
+        &:hover
+        {
+          color: green;
+          text-decoration: none;
+        }
+        &.admin
+        {
+          color: blue;
+          &:hover
+          {
+            color: red;
+          }
+        }
+      }
+    }
+  }
+
+  &.product-list
+  {
+    li
+    {
+      &.products
+      {
+        border: 1px solid green;
+        padding: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+
+        span img.product-image
+        {
+          height: 50px;
+          width: 50px;
+        }
+      }
+
+      &.grow
+      {
+        transition: all .2s ease-in-out;
+        &:hover
+        {
+          transform: scale(1.1);
+        } 
+      }
+    }
+
+  }
+}
+
 .checkbox
 {
   margin-top: -10px;
@@ -260,34 +322,4 @@ table
       text-align: right;
     }
   }
-}
-
-.index
-{
-  list-style: none;
-  margin: 0;
-  li
-  {
-    overflow: auto;
-    padding: 5px 0;
-    border-bottom: 1px solid $gray-lighter;
-
-    a
-    {
-      color: black;
-      &:hover
-      {
-        color: green;
-        text-decoration: none;
-      }
-      &.admin
-      {
-        color: blue;
-        &:hover
-        {
-          color: red;
-        }
-      }
-    }
-  }    
 }

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   before_action :validate_session
+  before_action :logged_in_user
 
   def logged_in_user
     unless logged_in?

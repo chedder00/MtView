@@ -4,9 +4,6 @@ class UsersController < ApplicationController
   #method can be found in application controller
   before_action :administrator_access, except: [:edit, :update]
 
-  #Ensure only logged in users can modify profile
-  before_action :logged_in_user, only: [:edit, :update]
-
   #Ensure that non admin users can only edit thier own password
   before_action :correct_user, only: [:edit, :update]
 

@@ -15,14 +15,20 @@
   </aside>
 
   <div class="col-md-6">
-    <h2 class="section">Current items in order</h2>
-    <% will_paginate @items %>
-    <ul class="index" %>
-      <%= render @items %>
-    </ul>
-    <% if !@order.submitted? %> 
-      <%= render 'items/form', 
-                  url: user_order_items_path(order_id: @order.id) %>
+    <% if @items.any? %>
+      <h2 class="section">Current items in order</h2>
+      <%= will_paginate @items %>
+      <ul class="index" %>
+        <%= render @items %>
+      </ul>
+    <% else %>
+      <h2 class="section">Order empty</h2>
     <% end %>
   </div>
+</div>
+
+<div class="row">
+  <% if !@order.submitted? %> 
+    <%= render 'items/form' %>
+  <% end %>
 </div>

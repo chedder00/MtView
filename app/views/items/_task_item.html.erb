@@ -1,0 +1,18 @@
+<% item = locals[:item] %>
+<div class="col-md-6 col-md-offset-3">
+  <%= form_for(object.items.build, 
+               url: task_items_path(task_id: object.id)) do |item| %>
+    <%= render 'shared/error_messages', object: item.object %>
+    
+    <%= item.label :inventory_item_id, "Item" %><br />
+    <%= item.select :inventory_item_id, 
+        options_for_select(@avaliable.map{|s|[checkbox_display(s),s.id]}) %>
+
+
+    <%= item.label :quantity %>
+    <%= item.number_field :quantity, class: "form-control" %>
+
+    <%= item.submit @btn_text, class: "btn btn-primary" %>
+
+  <% end %>
+</div>

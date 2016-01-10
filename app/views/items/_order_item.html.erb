@@ -1,0 +1,37 @@
+<% item = locals[:item] %>
+<% products = locals[:products] %>
+
+<div class="col-md-10 col-md-offset-1">
+  <ul class="list-inline product-list">
+    <% products.each do |product| %>
+      <li class="products grow">
+        <%= form_for(object.items.build,
+                  url: user_order_items_path(order_id: object.id)) do |item| %>        
+          
+          <%= render 'shared/error_messages', object: item.object %>
+          
+          <%= item.hidden_field :inventory_item_id, value: product.id %>
+          
+          <span>
+            <%= image_tag("logo.jpg", alt: "#{product.name}", 
+                                      class: "product-image") %>
+            <%= "#{product.name}" %>
+            <br />
+          </span>
+          
+          <%= "Avaliable Quantity: #{product.quantity}" %><br />
+
+          <%= item.label :quantity %>
+          <%= item.number_field :quantity, class: "form-control" %>
+        
+          <%= item.submit "Add to order", class: "btn btn-primary" %>
+
+        <% end %>
+      
+      </li>
+    
+    <% end %>
+  
+  </ul>
+  <%= will_paginate @avaliable %>
+</div>

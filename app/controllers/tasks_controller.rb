@@ -69,9 +69,10 @@ class TasksController < ApplicationController
     @plant = Plant.find_by(id: params[:plant_id])
     @task = Task.find(params[:id])
     @page_title = @page_heading = "#{@task.name}"
+    @btn_text = "Add to task"
     @item = @task.items.build
     @item.task_number = @task.id
-    @items = @task.items.all
+    @items = @task.items.all.paginate(page: params[:page]).per_page(6)
     @avaliable = InventoryItem.all
     if(flash.any?)
       if(!flash[:danger].nil?)

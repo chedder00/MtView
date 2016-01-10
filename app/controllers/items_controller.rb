@@ -1,27 +1,23 @@
 class ItemsController < ApplicationController
 
-  before_action :logged_in_user, only: [:create, :destroy, 
-                                        :return, :return_update]
-
   def create
+    #debugger
     @item = Item.new(item_params)
     @item.order_number = params[:order_id]
     @item.task_number = params[:task_id]
     if(@item.save)
       flash[:success] = "Item added"
     else
-      @item.update_current
+      if(@item.update_current)
+        flash[:success] = "Quantity added to existing item"
+      end
       back_url = send_back
       if(!@item.errors.any? && @item.quantity == 0)
         @item.destroy
         redirect_to back_url
         return
-      else        
-        if(@item.errors.any?)
-          flash[:danger] = @item.errors if @item.errors.any?
-        else
-          flash[:success] = "Quantity added to existing item"
-        end
+      else
+        flash[:danger] = @item.errors if @item.errors.any?
       end
     end
     redirect_to send_back
@@ -32,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def return_update
-    debugger
     @item = Item.find(params[:item_id])
     @item.return_quantity = params[:item][:return_quantity]
     @item.task_number = params[:task_id]

@@ -42,17 +42,26 @@ class Item < ActiveRecord::Base
   #with this objects information
   def update_current
     if(update_existing?)
+      #generate new quantity
       qty = @itm.quantity + self.quantity
+      #update existing
       @itm.update_column(:quantity, qty)
+      #if item belongs to an order update total
       if(!@itm.order.nil?)
         @parent.update_attributes(update_total: (self.quantity * 
                                                @itm.purchase_price_cents))
       end
-      self.quantity = 0
+      #remove quantity from inventory
       update_inventory(0-self.quantity)
+      #set current item quantity to 0
+      self.quantity = 0
+      #update ids for routing purposes
+      update_ids      
+      return true
     end
     #ensures returning object can be routed properly
     update_ids
+    return false
   end
 
   def sub_total

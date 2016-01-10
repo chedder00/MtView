@@ -17,13 +17,16 @@
                                plant_path(@task.plant) %></p>
     <% end %>
 
-    <h2 class="section">Items</h2>
-    <ul class="index">
-      <%= render @items %>
-    </ul>
-
-    <h2>Add item to task</h2>
-    <%= render 'items/form', url: task_items_path(@task) %> 
+    <% if @task.items.any? %>
+      <h2 class="section">Items</h2>
+      <ul class="index">
+        <%= render @items %>
+      </ul>
+      <%= will_paginate @items %>
+    <% end %>
     
   </div>
 </div>
+
+<h2>Add item to task</h2>
+<%= render 'items/form' %> 
