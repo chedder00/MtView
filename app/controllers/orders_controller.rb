@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    current_user.orders.find(params[:id]).destroy
+    Order.find(params[:id]).destroy
     flash[:success] = "Order deleted"
     redirect_to root_url
   end
