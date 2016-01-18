@@ -2,7 +2,6 @@ class InventoryItemsController < ApplicationController
 
   before_action :administrator_access, only: [:new, :create, :destroy]
   before_action :inventory_controller_access, except: [:show, :index]
-  before_action :logged_in_user, only: [:show, :index]
 
   def new
     @page_title = "New Inventory Item"
@@ -49,12 +48,12 @@ class InventoryItemsController < ApplicationController
   def show
     @item = InventoryItem.find(params[:id])
     @page_title = @page_heading = @item.name
-    @notes = @item.notes.paginate(page: params[:page])
+    @notes = @item.notes(:message).page(params[:page])
   end
 
   def index
     @page_title = @page_heading = "All Inventory Items"
-    @inventory_items = InventoryItem.paginate(page: params[:page])
+    @inventory_items = InventoryItem.page(params[:page])
   end
 
   def destroy
@@ -67,12 +66,12 @@ class InventoryItemsController < ApplicationController
 private
 
   def item_params
-    if(controller?)
+    if(current_user.controller?)
       params.require(:inventory_item).permit( :name, 
                                               :avaliable_to_reseller,
                                               :increase_qty,
                                               :new_price )
-    elsif(administrator?)
+    elsif(current_user.administrator?)
       params.require(:inventory_item).permit( :name, 
                                               :avaliable_to_reseller,
                                               :increase_qty )

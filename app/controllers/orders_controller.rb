@@ -38,7 +38,9 @@ class OrdersController < ApplicationController
 
   def index
     @page_title = @page_heading = "All Orders"
-    @orders = Order.current.paginate(page: params[:page])
+    @orders = Order.current.page(params[:page])
+    @submitted = Order.history.page(params[:page])
+    @closed = Order.closed.page(params[:page])
   end
 
   def show 
@@ -47,13 +49,14 @@ class OrdersController < ApplicationController
     @page_heading = @page_title + " for #{@order.user.name}"
     @btn_text = "Add to order"
     @item = @order.items.build
-    @items = @order.items.paginate(page: params[:page]).per_page(5)
-    @avaliable = InventoryItem.resale.paginate(page: params[:page]).per_page(10)
+    @items = @order.items.page(params[:page]).per(5)
+    @avaliable = InventoryItem.resale.page(params[:page]).per(10)
   end
 
   def submit
     @order = current_user.orders.find(params[:order_id])
     @order.update_attributes(submitted: true)
+    #TODO: send emails
     redirect_to root_url
   end
 
@@ -72,7 +75,7 @@ private
 
   def reseller
     unless current_user.administrator?
-      return current_user.reseller?
+      return current_user.reseller?(true)
     end
   end
 

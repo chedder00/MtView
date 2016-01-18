@@ -1,11 +1,17 @@
 <li>
-  <%= "#{item.quantity}" %> - 
-  <%= link_to item.inventory_item.name, link_path(item) %>
-  <% if staff? %>
-    <%= link_to "return unused to stock", item_return_path(item), 
-                class: "admin" %> |
+  <% if !locals[:in_table] %>
+    <%= "#{item.quantity}" %> - 
+    <%= link_to item.inventory_item.name, link_path(item) %>
+    <% if !locals[:submitted] && staff? %>
+      <%= link_to "return unused to stock", item_return_path(item), 
+                  class: "admin" %> |
+    <% end %>
+    <% if !locals[:submitted] %>
+      <%= link_to "delete", item_path(id: item.id), method: :delete, 
+                                       data: { confirm: "Delete item?" }, 
+                                       class: "admin" %>
+    <% end %>
+  <% else %>
+    <%= humanized_money_with_symbol(item.sub_total) %>
   <% end %>
-  <%= link_to "delete", item_path(id: item.id), method: :delete, 
-                                   data: { confirm: "Delete item?" }, 
-                                   class: "admin" %>
 </li>

@@ -6,11 +6,11 @@ class StaticPagesController < ApplicationController
     redirect_to login_url and return unless logged_in?
     @page_title = "Home"
     if(current_user.staff?)
-      @tasks = current_user.tasks.paginate(page: params[:page]).per_page(10)
-      @notes = current_user.notes.paginate(page: params[:page]).per_page(10)
+      @tasks = current_user.tasks.sorted("DESC").page(params[:page]).per(10)
+      @notes = current_user.notes.all.page(params[:page]).per(10)
       @page_heading = "Checklist"
     else
-      @orders = current_user.orders.current.paginate(page: params[:page])
+      @orders = current_user.orders.current.page(params[:page])
       @page_heading = "Open orders"
     end
   end

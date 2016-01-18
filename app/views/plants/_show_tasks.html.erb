@@ -1,5 +1,4 @@
 <h2>Tasks</h2>
-<ul class="index">
-  <%= render @tasks %>
-</ul>
-<%= will_paginate @tasks %>
+<%= render 'shared/paginate_list', object: @tasks, 
+                                   locals: { class_name: "index", 
+                                             display: "bottom"} %>

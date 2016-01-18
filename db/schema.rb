@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160106002402) do
+ActiveRecord::Schema.define(version: 20160114044732) do
 
   create_table "inventory_items", force: :cascade do |t|
     t.string   "name"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160106002402) do
   end
 
   add_index "plants", ["plant_state_id"], name: "index_plants_on_plant_state_id"
+  add_index "plants", ["serial_number"], name: "index_plants_on_serial_number"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -100,6 +101,16 @@ ActiveRecord::Schema.define(version: 20160106002402) do
 
   add_index "roles", ["level"], name: "index_roles_on_level", unique: true
   add_index "roles", ["name"], name: "index_roles_on_name", unique: true
+
+  create_table "states", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbr"
+    t.string   "country"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "states", ["abbr"], name: "index_states_on_abbr"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"

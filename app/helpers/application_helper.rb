@@ -22,9 +22,16 @@ module ApplicationHelper
   def method_missing(method, *args, &block)
     return false if current_user.nil?
     self.class.send :define_method, method do |arg=nil|
-      return current_user.send(method, *args, &block)
+        return current_user.send(method, *args, &block)
     end
     self.send(method)
   end
+
+  # if(Rails.env.development? || Rails.env.test?)
+  #   def t(key, opts = {})
+  #     opts = opts.merge(:raise => true)
+  #     I18n.t(key, opts)
+  #   end
+  # end
 
 end

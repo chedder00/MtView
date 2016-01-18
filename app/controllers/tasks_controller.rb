@@ -48,11 +48,8 @@ class TasksController < ApplicationController
   end
 
   def update
-    @page_title = "Edit Task"
     @plant = Plant.find_by(id: params[:plant_id])
     @task = Task.find(params[:id])
-    @page_heading = "Edit #{@task.name}"
-    @btn_text = "Update #{@task.name}"
     if(@task.update_attributes(task_params))
       flash[:success] = "#{@task.name} updated"
       if(@plant)
@@ -71,8 +68,7 @@ class TasksController < ApplicationController
     @page_title = @page_heading = "#{@task.name}"
     @btn_text = "Add to task"
     @item = @task.items.build
-    @item.task_number = @task.id
-    @items = @task.items.all.paginate(page: params[:page]).per_page(6)
+    @items = @task.items.page(params[:page]).per(6)
     @avaliable = InventoryItem.all
     if(flash.any?)
       if(!flash[:danger].nil?)
@@ -90,13 +86,13 @@ class TasksController < ApplicationController
     @page_title = "All Tasks"
     if(@user)
       @page_heading = "Tasks for #{@user.name}"
-      @tasks = @user.tasks.paginate(page: params[:page])
+      @tasks = @user.tasks.page(params[:page])
     elsif(@plant)
       @page_heading = "Tasks for #{@plant.name}"
-      @tasks = @plant.tasks.paginate(page: params[:page])
+      @tasks = @plant.tasks.page(params[:page])
     else
       @page_heading = "#{@page_title}"
-      @tasks = Task.paginate(page: params[:page])
+      @tasks = Task.all.page(params[:page])
     end
   end
 

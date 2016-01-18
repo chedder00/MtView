@@ -25,7 +25,7 @@
       <h2 class="section">
         Notes <%= link_to 'add', new_inventory_item_note_path(@item) %>
       </h2>
-      <%= will_paginate @notes %>
+      <%= paginate @notes %>
       <ul class="notes">
         <%= render @notes %>
       </ul>

@@ -39,13 +39,23 @@ Rails.application.routes.draw do
   end
   resources :notes
 
+  #REPORTS
+  resource :reports, as: :report, only: :new do
+    get 'full_plant' => 'reports#full_plant'
+    get 'full_note'  => 'reports#full_note'
+    get 'full_user'  => 'reports#full_user'
+    get 'full_task'  => 'reports#full_task'
+    get 'full_item'  => 'reports#full_item'
+    get 'full_order' => 'reports#full_order'
+    get 'receipt'    => 'reports#order_receipt'
+  end
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
   get    'about'   => 'static_pages#about'
   get    'contact' => 'static_pages#contact'
-
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

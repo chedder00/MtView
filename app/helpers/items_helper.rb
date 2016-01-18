@@ -12,7 +12,7 @@ module ItemsHelper
     if(!@item.order.nil?)
       "#{item.name} - #{humanized_money_with_symbol(item.price)}"
     else
-      "#{item.name}"
+      "#{item.name} - Avaliable Quantity: #{item.quantity}"
     end
   end
 

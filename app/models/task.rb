@@ -7,4 +7,12 @@ class Task < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 100 }
 
+  class << self
+    
+    def sorted(direction = "ASC")
+      order("updated_at #{direction}")
+    end
+
+  end
+
 end

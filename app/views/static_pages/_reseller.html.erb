@@ -1,8 +1,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= will_paginate @orders %>
-    <ul class="index">
-      <%= render @orders %>
-    </ul>
+    <%= render 'shared/paginate_list', object: @orders, 
+                                   locals: { class_name: "index", 
+                                             display: "top"} %>
   </div>
 </div>

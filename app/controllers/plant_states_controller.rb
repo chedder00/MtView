@@ -51,7 +51,7 @@ class PlantStatesController < ApplicationController
   def index
     @page_title = "All States"
     @page_heading = "All Plant States"
-    @plant_states = PlantState.paginate(page: params[:page])
+    @plant_states = PlantState.page(params[:page])
   end
 
 ################## PRIVATE METHODS #############################################

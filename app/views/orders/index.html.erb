@@ -2,8 +2,11 @@
 <h1><%= "#{@page_heading}" %></h1>
 <br />
 
-<%= will_paginate %>
-  <ul class="index">
-    <%= render @orders %>
-  </ul>
-<%= will_paginate %>
+<h2 class="section">Submitted</h2>
+<%= render 'shared/paginate_list', object: @submitted,
+                                   locals: { class_name: "index", 
+                                             display: "both"} %>
+<h2 class="section">Closed</h2>
+<%= render 'shared/paginate_list', object: @closed,
+                                 locals: { class_name: "index", 
+                                           display: "both"} %>

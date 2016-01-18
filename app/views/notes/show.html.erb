@@ -1,3 +1,6 @@
-<ul class="index">
-  <%= render @note %>
-</ul>
+<% render 'shared/page_title' %>
+<h1><%= "#{@page_heading}" %></h1>
+<br />
+
+<p>Date: <%= "#{@note.date}" %></p>
+<p>Message: <%= "#{@note.message}" %></p>

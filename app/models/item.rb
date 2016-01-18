@@ -20,7 +20,7 @@ class Item < ActiveRecord::Base
 
   monetize :purchase_price_cents
   monetize :sub_total
-  
+
   def return_quantity
     @return_quantity
   end
@@ -35,6 +35,10 @@ class Item < ActiveRecord::Base
 
   def task_number=(val)
     @task_number = val
+  end
+  
+  def sub_total
+    ((self.quantity.to_f * self.purchase_price_cents.to_f) / 100).to_f
   end
 
   #Should be called after a failed save because an entry for the item already
@@ -62,10 +66,6 @@ class Item < ActiveRecord::Base
     #ensures returning object can be routed properly
     update_ids
     return false
-  end
-
-  def sub_total
-    ((self.quantity.to_f * self.purchase_price_cents.to_f) / 100).to_f
   end
 
 ################## PRIVATE METHODS #############################################

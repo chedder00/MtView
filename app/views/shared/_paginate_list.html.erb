@@ -1,0 +1,9 @@
+<% if(locals[:display] == "top" || locals[:display] == "both") %>
+  <%= paginate object %>
+<% end %>
+<ul class=<%= locals[:class_name] %> >
+  <%= render object, locals: locals %>
+</ul>
+<% if(locals[:display] == "bottom" || locals[:display] == "both") %>
+  <%= paginate object %>
+<% end %>

@@ -26,7 +26,11 @@ module SessionsHelper
   #logs out current user by removing session cookie user_id and setting
   #current_user variable to nill
   def logout
+    error = flash[:danger]
     reset_session
+    if(error)
+      flash[:danger] = error
+    end
     @current_user = nil
   end
 

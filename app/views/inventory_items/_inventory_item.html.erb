@@ -1,6 +1,6 @@
-<li>
+<li class='<%= locals[:class_name] %>'>
   <%= link_to inventory_item.name, inventory_item %>
-  <% if inventory_controller? %>
+  <% if !locals[:in_table] && inventory_controller? %>
     <%= link_to "edit", edit_inventory_item_path(inventory_item), 
                         class: "admin" %>
     <% if administrator? %>

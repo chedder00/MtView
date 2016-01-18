@@ -1,0 +1,43 @@
+h1
+{
+  page-break-before: always;
+  font-size: 3em;
+  
+  &.logo
+  {
+    color: red;
+  }
+}
+
+h1, h2, h3, h4, h5
+{
+  page-break-after: avoid;
+}
+
+table, figure
+{
+  page-break-inside: avoid;
+}
+
+li
+{
+  &.slim
+  {
+    margin: 0;
+  }
+}
+
+
+th
+{
+  background-color: black;
+  color: white;
+}
+
+label
+{
+  &.column_names
+  {
+    font-size: .75em;
+  }
+}

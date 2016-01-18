@@ -2,8 +2,6 @@
 <h1><%= "#{@page_heading}" %></h1>
 <br />
 
-<%= will_paginate %>
-  <ul class="index">
-    <%= render @notes %>
-  </ul>
-<%= will_paginate %>
+<%= render 'shared/paginate_list', object: @notes, 
+                                   locals: { class_name: "index", 
+                                             display: "both"} %>

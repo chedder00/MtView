@@ -1,5 +1,4 @@
 <h2>Notes</h2>
-<ul class="index">
-  <%= render @notes %>
-</ul>
-<%= will_paginate @notes %>
+<%= render 'shared/paginate_list', object: @notes, 
+                                   locals: { class_name: "index", 
+                                             display: "bottom"} %>

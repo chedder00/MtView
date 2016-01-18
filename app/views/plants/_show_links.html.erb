@@ -1,12 +1,42 @@
 <aside class="col-md-2">
 
   <section class="plant actions">
-    <%= link_to "Edit #{@plant.name}", edit_plant_path(@plant) %><br />
-    <%= link_to "Clone plant", plant_clone_path(@plant) %><br />
-    <%= link_to "Add Task", new_plant_task_path(@plant) %><br />
-    <%= link_to "Add Note", new_plant_note_path(@plant) %><br />
-    <%= link_to "Add Measurement", new_plant_measurement_path(@plant) %><br />
-    <%= link_to "Add testing record", "#" %><br />
+    <ul class="index">
+      <li>
+        <%= link_to "Full Report", full_plant_report_path(id: @plant.id,
+                                                          format: 'pdf'),
+                                                          class: "nav-link" %>
+      </li>
+      <li>
+        <%= link_to "Edit #{@plant.name}", edit_plant_path(@plant), 
+                                           class: "nav-link" %>
+        <br />
+      </li>
+      <li>
+        <%= link_to "Clone plant", plant_clone_path(@plant), 
+                                   class: "nav-link" %>
+        <br />
+      </li>
+      <li>
+        <%= link_to "Add Task", new_plant_task_path(@plant),
+                                class: "nav-link" %>
+        <br />
+      </li>
+      <li>
+        <%= link_to "Add Note", new_plant_note_path(@plant),
+                                class: "nav-link" %>
+        <br />
+      </li>
+      <li>
+        <%= link_to "Add Measurement", new_plant_measurement_path(@plant), 
+                                       class: "nav-link" %>
+        <br />
+      </li>
+      <li>
+        <%= link_to "Add testing record", "#", class: "nav-link" %>
+        <br />
+      </li>
+    </ul>
   </section>
 
 </aside>

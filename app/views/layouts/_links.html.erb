@@ -83,18 +83,40 @@
         <% end %>
       </ul>
     </li>
+  
+    <!-- Dropdown menu for Reports -->
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle menu-tab" data-toggle="dropdown">
+      Reports <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <% if administrator? %>
+          <li><%= link_to "Users", full_user_report_path %></li>
+          <li><%= link_to "Orders", full_order_report_path %></li>
+        <% end %>
+        <li><%= link_to "Plants", full_plant_report_path %></li>
+        <li><%= link_to "Tasks", full_task_report_path %></li>
+        <li><%= link_to "Notes", full_note_report_path %></li>
+        <li><%= link_to "Inventory", full_item_report_path %></li>
+      </ul>
+    </li>
+
   <% end %>
+
+
   <% if reseller?(true) %>
     <li>
       <%= link_to "New Order", user_orders_path(current_user), 
                                method: :create, class: "menu-tab" %>
     </li>
-  <% end %>
+  <% end %>  
 
   <li>
     <%= link_to "#{current_user.name} (Logout)", logout_path, method: :delete,
                                                  class: "menu-tab" %>
   </li>
+
 <% else %>
+  
   <li><%= link_to "Login", login_path, class: "menu-tab" %></li>
+
 <% end %>

@@ -6,10 +6,12 @@
   <aside class="col-md-2 col-md-offset-1">
     <section class="order_info">
       Order Total: <%= humanized_money_with_symbol(@order.total) %>
-      <% if !@order.submitted? %>
+      <% if !@order.submitted? && !@order.completed? %>
         <%= form_for(@order, url: order_submit_path(@order)) do |o| %>
           <%= o.submit "Submit Order", class: "btn btn-main" %>
         <%end %>
+      <% else %>
+        <br /><%= link_to "Print Invoice", receipt_report_path(id: @order.id) %>
       <% end %>
     </section>
   </aside>
@@ -17,10 +19,10 @@
   <div class="col-md-6">
     <% if @items.any? %>
       <h2 class="section">Current items in order</h2>
-      <%= will_paginate @items %>
-      <ul class="index" %>
-        <%= render @items %>
-      </ul>
+      <%= render 'shared/paginate_list', object: @items, 
+                                   locals: { class_name: "index", 
+                                             display: "both",
+                                             submitted: @order.submitted?} %>
     <% else %>
       <h2 class="section">Order empty</h2>
     <% end %>
@@ -28,7 +30,7 @@
 </div>
 
 <div class="row">
-  <% if !@order.submitted? %> 
+  <% if !@order.submitted? && !@order.completed? %> 
     <%= render 'items/form' %>
   <% end %>
 </div>

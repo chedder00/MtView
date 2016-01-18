@@ -1,5 +1,7 @@
 class PlantsController < ApplicationController
 
+  respond_to :html, :json
+
   before_action :administrator_access, only: [:new, :create, :destroy]
   before_action :staff_access
 
@@ -56,17 +58,15 @@ class PlantsController < ApplicationController
   def clone_create
     @clone = Clone.new(clone_params)
     if(@clone.valid?)
+      state = PlantState.find_by_name("Cloning").id
       @plant = Plant.find(params[:plant_id])
-      @page_title = "Clone #{@plant.name}"
-      @page_heading = "Cloning #{@plant.name}"
-      @btn_text = "Clone #{@plant.name}"
       @clone.clone_qty.to_i.times do |c|
         c = Plant.new
         c.name = @plant.name
         c.species = @plant.species
         c.planting_date = @clone.clone_date
         c.cloned_from_id = @plant.id
-        c.plant_state_id = PlantState.find_by(name: "Cloning").id
+        c.plant_state_id = state
         c.save
       end
       redirect_to plants_path
@@ -79,14 +79,16 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     @page_title = @page_heading = "#{@plant.name}"
     @task = @plant.tasks.new
-    @tasks = @plant.tasks.paginate(page: params[:page]).per_page(5)
-    @notes = @plant.notes.paginate(page: params[:page]).per_page(5)
+    @tasks = @plant.tasks.page(params[:page]).per(5)
+    @notes = @plant.notes.page(params[:page]).per(5)
     @measurement = @plant.measurements.last
+    @response = { plant: @plant, tasks: @task, notes: @notes }
+    respond_with @response
   end
 
   def index
     @page_title = @page_heading = "All Plants"
-    @plants = Plant.order('plant_state_id').paginate(page: params[:page])
+    @plants = Plant.state.page(params[:page])
   end
 
   def destroy
@@ -98,7 +100,7 @@ class PlantsController < ApplicationController
 ################## PRIVATE METHODS #############################################
 private
   def plant_params
-    if(administrator?)
+    if(current_user.administrator?)
       params.require(:plant).permit(
         :name,
         :species,

@@ -58,13 +58,13 @@ class UsersController < ApplicationController
 
   def index
     @page_title = "All Users"
-    @users = User.paginate(page: params[:page])
+    @users = User.page(params[:page])
   end
 
 ################## PRIVATE METHODS #############################################
 private
   def user_params
-    if(administrator?)
+    if(current_user.administrator?)
       params.require(:user).permit( 
         :name, 
         :email, 

@@ -31,7 +31,9 @@
       <%= user.text_field :city, class: "form-control" %>
 
       <%= user.label :state %>
-      <%= user.text_field :state, class: "form-control" %>
+      <%= user.select :state, options_for_select(State.all.map {|s| s.abbr},
+                              selected: @user.state),
+                              include_blank: true %>
 
       <%= user.label :zipcode %>
       <%= user.text_field :zipcode, class: "form-control" %>

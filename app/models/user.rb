@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   def authorized?(access, strict = false)
     access = (access == "Staff")? "Regular Employee" : access
     @roles ||= Role.all
-    if(@role = @roles.find_by(name: access))
+    if(@role = @roles.find_by(name: access.titlecase))
       if(strict)
         return self.role_id == @role.id
       else
@@ -76,11 +76,13 @@ class User < ActiveRecord::Base
         return authorized?(method.to_s.gsub('_access','').titlecase, args[0])
         self.send(method)
       end
-    else
+    elsif(method.to_s.match(/\?/))
       self.class.send :define_method, method do |arg=nil|
         return authorized?(method.to_s.gsub('?','').titlecase, args[0])
       end
-      self.send(method)
+      self.send(method, *args, &block)
+    else
+      return false
     end
   end
     
@@ -97,7 +99,7 @@ class User < ActiveRecord::Base
     end
 
     def staff
-      where("role_id != ?", Role.find_by(name: "Reseller"))
+      where("role_id !=?", Role.find_by(name: "Reseller"))
     end
     
   end

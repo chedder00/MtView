@@ -1,16 +1,14 @@
 <div class="row">
   <div class="col-md-5 col-md-offset-1">
     <h2 class="section">Tasks</h2>
-    <%= will_paginate @tasks %>
-    <ul class="index">
-      <%= render @tasks %>
-    </ul>
+    <%= render 'shared/paginate_list', object: @tasks, 
+                                   locals: { class_name: "index", 
+                                             display: "top"} %>
   </div>
   <div class="col-md-5 col-md-offset-1">
     <h2 class="section">Notes</h2>
-    <%= will_paginate @notes %>
-    <ul class="index">
-      <%= render @notes %>
-    </ul>
+    <%= render 'shared/paginate_list', object: @notes, 
+                                   locals: { class_name: "index", 
+                                             display: "top"} %>
   </div>
 </div>

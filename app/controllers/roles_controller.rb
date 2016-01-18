@@ -49,7 +49,7 @@ class RolesController < ApplicationController
   end
 
   def index
-    @roles = Role.paginate(page: params[:page])
+    @roles = Role.page(params[:page])
     @page_title = @page_heading = "User Roles"
   end
 

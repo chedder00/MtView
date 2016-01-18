@@ -1,3 +1,4 @@
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -28,6 +29,24 @@ $link_color: Black;
   @include box_sizing;
 }
 
+#error_explanation
+{
+  color: $warning;
+  ul
+  {
+    color: $warning;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors
+{
+  @extend .has-error;
+  .form-control
+  {
+    color: $state-danger-text;
+  }
+}
 
 /* GLOBALS */
 
@@ -64,6 +83,16 @@ textarea
 .inline
 {
   display: inline-block;
+}
+
+a
+{
+  color: $site_theme;
+
+  &:hover:visited:active
+  {
+    color: $site_accent;
+  }
 }
 
 
@@ -144,13 +173,13 @@ header
 
                 &:hover
                 {
-                  border-radius: 12px 12px 0 0;
+                  border-radius: 12px 0 0 0;
                   background-color: $site_accent;
                 }
 
                 &:focus
                 {
-                  border-radius: 12px 12px 0 0;
+                  border-radius: 12px 0 0 0;
                   background-color: $site_accent;
                 }
               }
@@ -260,12 +289,6 @@ input, textarea, select, .uneditable-input
   border: 1px solid #bbb;
   width: 100%;
   margin-bottom: 15px;
-  @include box_sizing
-}
-
-input
-{
-  height: auto !important;
   
   &.form-control:focus
   {
@@ -274,6 +297,12 @@ input
     margin: 5px 1px 3px 0px;
     border: 1px solid rgb(79,140,0);
   }
+  @include box_sizing
+}
+
+input
+{
+  height: auto !important;
 
   &.checkbox
   {
@@ -285,7 +314,7 @@ input
   &.btn-main
   {
     background: $site_theme;
-    background: linear-gradient(rgb(79,140,0) 0%,rgb(120,170,20) 100%); 
+    background: linear-gradient(rgb(79,140,0) 60%,rgb(120,170,20) 100%); 
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f8c00', endColorstr='#78aa14',GradientType=1 ); /* IE6-9 */    
     
@@ -298,25 +327,6 @@ input
       background: $site_accent;
       color: $nav_text_color
     }
-  }
-}
-
-#error_explanation
-{
-  color: $warning;
-  ul
-  {
-    color: $warning;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors
-{
-  @extend .has-error;
-  .form-control
-  {
-    color: $state-danger-text;
   }
 }
 
@@ -334,6 +344,12 @@ ul
       a
       {
         color: $link_color;
+
+        &.nav-link
+        {
+          color: $site_theme;
+        }
+        
         &:hover
         {
           color: $site_accent;
@@ -378,7 +394,6 @@ ul
         } 
       }
     }
-
   }
 }
 
@@ -390,6 +405,88 @@ ul
   {
     margin-left: 20px;
     font-weight: normal;
+  }
+}
+
+
+/* DATA GRID */
+
+input.datagrid-submit
+{
+
+  background: $site_theme;
+  background: linear-gradient(rgb(79,140,0) 60%,rgb(120,170,20) 100%); 
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f8c00', endColorstr='#78aa14',GradientType=1 ); /* IE6-9 */    
+  
+  border-color: $site_accent;
+  color: $nav_text_color;
+  text-shadow: 0 1px 1px rgba(0,0,0,.3);
+  border-radius: .3em;
+  &:hover
+  {
+    background: $site_accent;
+    color: $nav_text_color
+  }
+}
+
+div
+{
+  &.filter
+  {
+    label
+    {
+      width: 10%;
+    }
+
+    label[for=full_user_id]
+    {
+      display: none;
+    }
+    label[for=full_plant_id]
+    {
+      display: none;
+    }
+
+    input
+    {
+      width: 60%;
+      
+      &.id
+      {
+        display: none;
+      }
+    }
+
+    select
+    {
+      width: 60%
+    }
+
+    span.range
+    {
+      input
+      {
+        width: 28.25%;
+      }
+    }
+  }
+}
+
+table.datagrid
+{
+  max-width: 100%;
+  white-space: nowrap;
+
+  thead
+  {
+    tr
+    {
+      th
+      {
+        padding: 3px;
+      }
+    }
   }
 }
 

@@ -19,14 +19,11 @@
 
     <% if @task.items.any? %>
       <h2 class="section">Items</h2>
-      <ul class="index">
-        <%= render @items %>
-      </ul>
-      <%= will_paginate @items %>
+      <%= render 'shared/paginate_list', object: @items, 
+                                   locals: { class_name: "index", 
+                                             display: "bottom"} %>
     <% end %>
-    
+    <h2>Add item to task</h2>
+    <%= render 'items/form' %>     
   </div>
 </div>
-
-<h2>Add item to task</h2>
-<%= render 'items/form' %> 

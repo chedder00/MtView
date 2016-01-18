@@ -6,6 +6,10 @@ module PlantsHelper
     end
   end
 
+  def plant_states
+    @state ||= PlantState.all
+  end
+
   def cloned_from(id)
     Plant.find_by(id: id).serial_number
   end
