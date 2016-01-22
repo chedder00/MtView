@@ -27,8 +27,21 @@ ActiveRecord::Schema.define(version: 20160114044732) do
 
   add_index "inventory_items", ["name"], name: "index_inventory_items_on_name"
 
-# Could not dump table "items" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "items", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "inventory_item_id"
+    t.integer  "quantity",             default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "order_id"
+    t.integer  "purchase_price_cents", default: 0
+  end
+
+  add_index "items", ["inventory_item_id"], name: "index_items_on_inventory_item_id"
+  add_index "items", ["order_id", "inventory_item_id"], name: "index_items_on_order_id_and_inventory_item_id"
+  add_index "items", ["order_id"], name: "index_items_on_order_id"
+  add_index "items", ["task_id", "inventory_item_id"], name: "index_items_on_task_id_and_inventory_item_id"
+  add_index "items", ["task_id"], name: "index_items_on_task_id"
 
   create_table "measurements", force: :cascade do |t|
     t.float    "base",       default: 0.0

@@ -59,11 +59,11 @@ class User < ActiveRecord::Base
   def authorized?(access, strict = false)
     access = (access == "Staff")? "Regular Employee" : access
     @roles ||= Role.all
-    if(@role = @roles.find_by(name: access.titlecase))
+    if(@role = @roles.find_by(name: access))
       if(strict)
-        return self.role_id == @role.id
+        return self.role.level == @role.level
       else
-        return self.role_id >= @role.id
+        return self.role.level >= @role.level
       end
     end
   end
@@ -74,13 +74,13 @@ class User < ActiveRecord::Base
     if(method.to_s.match(/_access/))
       self.class.send :define_method, method do |arg=nil|
         return authorized?(method.to_s.gsub('_access','').titlecase, args[0])
-        self.send(method)
+        return self.send(method)
       end
     elsif(method.to_s.match(/\?/))
       self.class.send :define_method, method do |arg=nil|
         return authorized?(method.to_s.gsub('?','').titlecase, args[0])
       end
-      self.send(method, *args, &block)
+      return self.send(method, *args, &block)
     else
       return false
     end

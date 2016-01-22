@@ -21,10 +21,7 @@ module ApplicationHelper
 
   def method_missing(method, *args, &block)
     return false if current_user.nil?
-    self.class.send :define_method, method do |arg=nil|
-        return current_user.send(method, *args, &block)
-    end
-    self.send(method)
+    return current_user.send(method, *args, &block)
   end
 
   # if(Rails.env.development? || Rails.env.test?)

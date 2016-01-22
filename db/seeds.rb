@@ -25,6 +25,6 @@ require 'csv'
 # PlantState.create!(name: "Harvesting")
 # PlantState.create!(name: "Mother")
 
-CSV.foreach('db/state_table.csv', headers: true) do |row|
-  State.create!(row.to_hash)
-end
+# CSV.foreach('db/state_table.csv', headers: true) do |row|
+#   State.create!(row.to_hash)
+# end

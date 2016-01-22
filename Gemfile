@@ -22,6 +22,7 @@ gem 'responders'
 gem 'datagrid'
 # PDF generator for reports
 gem 'wicked_pdf'
+gem 'wkhtmltopdf-heroku'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password

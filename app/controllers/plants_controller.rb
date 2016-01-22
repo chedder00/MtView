@@ -2,8 +2,8 @@ class PlantsController < ApplicationController
 
   respond_to :html, :json
 
-  before_action :administrator_access, only: [:new, :create, :destroy]
   before_action :staff_access
+  before_action :administrator_access, only: [:new, :create, :destroy]
 
   def new
     @page_heading = "Add a Plant"
@@ -92,6 +92,7 @@ class PlantsController < ApplicationController
   end
 
   def destroy
+    #debugger
     Plant.find(params[:id]).destroy
     flash[:success] = "Plant deleted"
     redirect_to plants_path

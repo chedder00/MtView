@@ -13,6 +13,7 @@ class StaticPagesControllerTest < ActionController::TestCase
 
   test "should get home if logged in" do
     login_as(users(:reg_user))
+    debugger
     get :home
     assert_response :success
     assert_select "title", "Home | #{@base_title}" 

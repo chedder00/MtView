@@ -20,7 +20,7 @@ class PlantsControllerTest < ActionController::TestCase
   test "should allow admin users" do
     login_as(users(:admin_user))
     get :new
-    assert_response :success
+    assert_template 'shared/form'
   end
 
   test "should allow non admin to view all plants" do

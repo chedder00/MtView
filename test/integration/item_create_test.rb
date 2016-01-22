@@ -16,7 +16,7 @@ class ItemCreateTest < ActionDispatch::IntegrationTest
       post inventory_items_path, inventory_item: { name: "A Product",
                                                    increase_qty: 3 }
     end
-    assert_redirected_to login_url
+    assert_redirected_to root_url
     assert_not flash.empty?
   end
 

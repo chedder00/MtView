@@ -10,16 +10,12 @@ class ApplicationController < ActionController::Base
   before_action :logged_in_user
 
   def method_missing(method, *args, &block)
-    return false if current_user.nil?    
-    if(current_user.send(method, *args, &block))
-      self.class.send :define_method, method do |arg=nil|
-        return current_user.send(method, *args, &block)
-      end
-      self.send(method)
-    else
+    return false if current_user.nil?
+    current_user.send(method, *args, &block)
+    if(!current_user.send(method, *args, &block))
       flash[:danger] = "Unauthorized Access"
       redirect_to root_url
-    end    
+    end
   end
 
 private

@@ -23,7 +23,8 @@ class PlantStatesControllerTest < ActionController::TestCase
   test "should allow admin users" do
     login_as(@admin)
     get :new
-    assert_response :success
+    assert_redirected_to login_url
+    assert_not flash.empty?
   end
   
 end

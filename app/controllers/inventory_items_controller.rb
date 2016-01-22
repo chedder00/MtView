@@ -1,7 +1,7 @@
 class InventoryItemsController < ApplicationController
 
-  before_action :administrator_access, only: [:new, :create, :destroy]
   before_action :inventory_controller_access, except: [:show, :index]
+  before_action :administrator_access, only: [:new, :create, :destroy]
 
   def new
     @page_title = "New Inventory Item"
