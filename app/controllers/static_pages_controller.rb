@@ -3,7 +3,6 @@ class StaticPagesController < ApplicationController
   skip_before_action :logged_in_user
 
   def home
-    debugger
     redirect_to login_url and return unless logged_in?
     @page_title = "Home"
     if(current_user.staff?)
