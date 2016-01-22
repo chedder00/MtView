@@ -21,7 +21,7 @@ gem 'responders'
 # Query helper for reports
 gem 'datagrid'
 # PDF generator for reports
-gem 'wicked_pdf'
+gem 'wicked_pdf', git: "https://github.com/Bonias/wicked_pdf.git"
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password

@@ -22,7 +22,7 @@ private
   def validate_session
     if(!session[:expires_at].nil? && session[:expires_at] >= Time.current)
       session[:expires_at] = Time.current + 10.minutes
-    elsif(!Rails.env.development?)
+    elsif(!Rails.env.development? && logged_in? )
       flash[:danger] = "Session Timout: "
       logout
     end
