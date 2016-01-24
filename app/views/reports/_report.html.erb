@@ -1,8 +1,8 @@
 <p class="export-links">
-  <%= link_to "Save to PDF", url_for(format: 'pdf'), target: _blank %> | 
+  <%= link_to "Save to PDF", pdf_link(params), target: _blank %> | 
   <%= link_to "Save to CSV", url_for(format: 'csv') %>
 <p>
-<%= datagrid_form_for @grid, :method => :get, :url => reports_path %>
+<%= datagrid_form_for @grid, method: :get, url: reports_path %>
 
 <%= paginate(@assets) %>
 <%= datagrid_table(@grid, @assets) %>

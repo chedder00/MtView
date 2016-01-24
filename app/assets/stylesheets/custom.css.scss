@@ -439,11 +439,10 @@ div
       width: 10%;
     }
 
-    label[for=full_user_id]
-    {
-      display: none;
-    }
-    label[for=full_plant_id]
+    label[for=full_user_id], 
+         [for=full_plant_id],
+         [for=full_order_id],
+         [for=full_item_id]
     {
       display: none;
     }
