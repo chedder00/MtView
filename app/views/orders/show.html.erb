@@ -11,7 +11,8 @@
           <%= o.submit "Submit Order", class: "btn btn-main" %>
         <%end %>
       <% else %>
-        <br /><%= link_to "Print Invoice", receipt_report_path(id: @order.id) %>
+        <br /><%= link_to "Print Invoice", 
+                  receipt_report_path(id: @order.id), target: _blank %>
       <% end %>
     </section>
   </aside>

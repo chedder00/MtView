@@ -20,3 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  company:
+    title: "Mountain View Medicals"
+    address: "1234 Some Address"
+    city: "Some City"
+    state: "SS"
+    zipcode: "12345"
+    phone: "(541) 555-2163"

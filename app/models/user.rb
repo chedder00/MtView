@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_now
   end
 
+  def send_new_account_email
+    UserMailer.new_account(self).deliver_now
+  end
+
   #Returns true if the given token matches the digest
   def authenticated?(attribute, token)
     digest = send("#{attribute}_digest")

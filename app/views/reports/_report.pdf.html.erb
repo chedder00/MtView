@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "pdf" %>
+    <%= javascript_include_tag "https://code.jquery.com/jquery-2.2.0.min.js" %>
+
+  </head>
+  <header>
+    <h1 class="pdf-logo">
+      <%= t('company.title') %>
+    </h1>
+    <div class="address-block">
+      <p><%= t('company.address') %></p>
+      <p>
+        <%= t('company.city')%>&#44;&nbsp;
+        <%= t('company.state') %>&nbsp;
+        <%= t('company.zipcode') %>
+      </p>
+      <p><%= t('company.phone') %></p>
+    </div>
+  </header>
+  <body>
+    <div id="content" class="pdf-content">
+      <%= datagrid_table(@grid, html: {class: "splitForPrint"}) %>        
+    </div>
+  </body>
+</html>

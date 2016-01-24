@@ -1,11 +1,49 @@
+header
+{
+  margin-bottom: 20px;
+
+  div.address-block
+  {
+    margin-top: 5px;
+    text-align: right;
+    p
+    {
+      margin: 0;
+    }
+  }
+}
+
+block
+{
+  width: 99%;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 5px;
+
+  div.left
+  {
+    width: 44%;
+    float: left;
+    text-align: left;
+  }
+  div.right
+  {
+    width: 44%;
+    float: right;
+    text-align: right;
+  }
+}
+
 h1
 {
   page-break-before: always;
   font-size: 3em;
   
-  &.logo
+  &.pdf-logo
   {
-    color: red;
+    text-align: center;
+    color: DarkGreen;
+    margin-bottom: 0;
   }
 }
 
@@ -28,10 +66,92 @@ li
 }
 
 
-th
+table
 {
-  background-color: black;
-  color: white;
+  border-collapse: collapse;
+  border: .5px solid DarkGreen;
+
+  td.quantity
+  {
+    width: 10%;
+  }
+  td.item-name
+  {
+    width: 70%;
+    text-align: left;
+  }
+  td.sub-total
+  {
+    width: 15%;
+    text-align: right;
+  }
+  
+  &.splitForPrint
+  {
+    border: 1px solid black;
+
+    a
+    {
+      pointer-events: none;
+      text-decoration: none;
+      color: black;
+    }
+
+    div.order
+    {
+      display: none;
+    }
+
+    th
+    {
+      background-color: DarkGray;
+      color: black;
+      padding: 10px;
+      font-size: .8em;
+      border: .5px solid black;
+    }
+
+    td
+    {
+      padding: 8px 8px 4px 4px;
+      border: .5px solid black;
+      font-size: .7em;
+    }
+  }
+
+  a
+  {
+    color: DarkGreen;
+  }
+  
+  thead
+  {
+    background-color: DarkGreen;
+    color: LightGreen;
+  }
+
+  th
+  {
+    padding: 10px;
+    text-decoration: bold;
+    text-align: center;
+  }
+
+  td
+  {
+    padding: 8px 8px 4px 4px;
+    text-align: center;
+    border: 1px solid LightGreen;
+  }
+
+  tr
+  {
+    page-break-inside: avoid !important;
+    &.even
+    {
+      background-color: LightGray;
+    }
+  }
 }
 
 label
@@ -39,5 +159,13 @@ label
   &.column_names
   {
     font-size: .75em;
+  }
+}
+
+div.order
+{
+  a
+  {
+    color: LightGreen;
   }
 }

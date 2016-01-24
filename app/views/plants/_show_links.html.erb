@@ -5,7 +5,8 @@
       <li>
         <%= link_to "Full Report", full_plant_report_path(id: @plant.id,
                                                           format: 'pdf'),
-                                                          class: "nav-link" %>
+                                                          class: "nav-link",
+                                                          target: _blank %>
       </li>
       <li>
         <%= link_to "Edit #{@plant.name}", edit_plant_path(@plant), 

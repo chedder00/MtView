@@ -10,17 +10,14 @@ class ReportsController < ApplicationController
 
   def full_user
     params[:full_user] = { id: params[:id] } if params[:full_user].nil?
-    @grid = FullUser.new(params[:full_user]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullUser.new(params[:full_user])
     respond("User Report", "Landscape")
   end
 
   def full_plant
     params[:full_plant] = {id: params[:id]} if params[:full_plant].nil?
-    @grid = FullPlant.new(params[:full_plant]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullPlant.new(params[:full_plant])
+    @assets = @grid.assets.page(params[:page])
     respond("Plant Report")
   end
 
@@ -31,50 +28,45 @@ class ReportsController < ApplicationController
                             inventory_item_id: params[:inventory_item_id]
                           } if params[:full_note].nil?
 
-    @grid = FullNote.new(params[:full_note]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullNote.new(params[:full_note])
     respond("Note Report")
   end
 
   def full_task
     params[:full_task] = {user_id: params[:user_id],
                          plant_id: params[:plant_id]} if params[:full_task].nil?
-    @grid = FullTask.new(params[:full_task]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullTask.new(params[:full_task])
     respond("Task Report")
   end
 
   def full_item
     params[:full_item] = {id: params[:id] } if params[:full_item].nil?
-    @grid = FullItem.new(params[:full_item]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullItem.new(params[:full_item])
     respond("Item Report")
   end
 
   def full_order
     params[:full_order] = { id: params[:id] } if params[:full_order].nil?
-    @grid = FullOrder.new(params[:full_order]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = FullOrder.new(params[:full_order])
     respond("Item Report")
   end
 
   def order_receipt
     params[:order_receipt] = { id: params[:id] }
-    @grid = OrderReceipt.new(params[:order_receipt]) do |scope|
-      scope.page(params[:page])
-    end
+    @grid = OrderReceipt.new(params[:order_receipt])
+    @order = @grid.assets.first
+    @user = @order.user
     request.format = 'pdf'
-    respond("Receipt")
+    respond("Receipt", nil, "orders/receipt.pdf.html.erb")
   end
 
 ################## PRIVATE METHODS #############################################
 private
   #redirects output to correct format
-  def respond(filename=nil, orientation="Portrait")
+  def respond(filename=nil, 
+              orientation="Portrait",
+              template='reports/_report.pdf.html.erb')
+    @assets = @grid.assets.page(params[:page])
     respond_to do |f|
       f.html do
         @grid.scope { |scope| scope.page(params[:page]) }
@@ -94,7 +86,7 @@ private
       end
       f.pdf do
         render pdf: "#{filename.underscore}_#{Time.now.to_s}",
-               template: 'reports/_report.pdf.erb',
+               template: template,
                header: { right: '[page] of [topage]' },
                orientation: orientation,
                show_as_html: params.key?('debug')

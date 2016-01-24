@@ -2,7 +2,7 @@ module ApplicationHelper
 
   #Establishes full page title for each page rendered
   def full_title(page_title = '')
-    site_title = "Mountain View Medicals"
+    site_title = t('company.title')
     if page_title.empty?
       site_title
     else

@@ -4,12 +4,12 @@
     <%= form_for(@measurement, url: plant_measurements_path) do |measurement| %>
       <%= render 'shared/error_messages', object: measurement.object %>
 
-        <%= measurement.label :base, "Base in feet" %>
+        <%= measurement.label :base, "Base in inches" %>
         <%= measurement.number_field :base, step: 0.001, 
           value: (number_with_precision(measurement.object.base, 
                   precision: 3) || 0), class: "form-control" %>
 
-        <%= measurement.label :height, "Height in feet" %>
+        <%= measurement.label :height, "Height in inches" %>
         <%= measurement.number_field :height, step: 0.001, 
           value: (number_with_precision(measurement.object.height, 
                   precision: 3) || 0), class: "form-control" %>

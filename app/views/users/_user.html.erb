@@ -3,9 +3,14 @@
   <% if administrator? %>
     <%= link_to "edit", edit_user_path(user), class: "admin" %>
     <% unless user.name == "Root User" %>
-      <%= link_to "delete", user, method: :delete, 
+      | <%= link_to "delete", user, method: :delete, 
                           data: { confirm: "Delete user #{user.name}?" },
                           class: "admin" %>
+      | <%= link_to "email new account/password reset instructions", 
+            password_resets_path( password_reset: { email: user.email },
+                                  new_account: true), 
+                                  method: :create, 
+                                  class: "admin" %>
     <% end %>
   <% end %>
 </li>

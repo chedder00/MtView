@@ -20,11 +20,13 @@
                        plant_path(@plant.cloned_from_id) %>
     </p>
   <% end %>
-    <% if !@measurement.nil? %>
+  <% if !@measurement.nil? %>
     <p>
-      Last Measurement:  Base(<%= @measurement.base %> ft.) 
-                         Height(<%= @measurement.height %> ft.)
+      Last Measurement:  Base(<%= @measurement.base %> in.) 
+                         Height(<%= @measurement.height %> in.)
     </p>
+  <% else %>
+    <p>No measurements</p>
   <% end %>
 
   <hr />

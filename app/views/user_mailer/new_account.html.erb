@@ -1,0 +1,10 @@
+<h1>Welcome to Mountain View Medicals</h1>
+
+<p>
+  To activate your account and set your password click the link below:
+</p>
+
+<%= link_to "Activate Account", edit_password_reset_url(@user.reset_token,
+                                                      email: @user.email) %>
+
+<p>This link will expire in two hours.</p>
